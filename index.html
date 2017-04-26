@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ghoust</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="main-container" class="columns">
+      <ul id="client-list">
+      </ul>
+    </div>
+  </body>
+  <script type="text/template" id="client-template">
+    <% var color = ((alive) ? "#72ED00" : "#EB440F" ) %>
+    <li class="client" id="client-<%= id %>" style="background:<%= color %>">
+        <span><%= id %></span>
+        <span><%= name %></span>
+    </li>
+  </script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+  <script type="text/javascript" src="js/ghoustApi.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</html>
