@@ -16,7 +16,7 @@ Install the dependencies and start the dev server:
     # serve dev server with hot reload at localhost:8080
     npm run dev
 
-It is recommended to install the Chrome developer tools Vue.js plugin
+It is recommended to install the Chrome developer tools [Vue.js plugin](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
 
 More commands:
 
