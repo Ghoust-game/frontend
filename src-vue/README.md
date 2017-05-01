@@ -1,38 +1,28 @@
-https://v4-alpha.getbootstrap.com/components/forms/
+Ghoust frontend
 
-# Setup
+* Uses [Vue.js](https://vuejs.org/), incl. vuex and vue-router
+* Official [mqtt.js client](https://www.npmjs.com/package/mqtt) npm lib
 
-* vue init vuex-hello
-* cd vuex-hello
-* npm install
-* npm install --save vuex
+# Getting started
 
+Install the dependencies and start the dev server:
 
+    # Install dependencies with yarn or npm
+    $ yarn  # or 'npm install'
 
-# vuex-hello
+    # serve dev server with hot reload at localhost:8080
+    npm run dev
 
-> hello vuex
+More commands:
 
-## Build Setup
+    # build for production with minification
+    npm run build
 
-``` bash
-# install dependencies
-npm install
+    # run unit tests
+    npm run unit
 
-# serve with hot reload at localhost:8080
-npm run dev
+    # run e2e tests
+    npm run e2e
 
-# build for production with minification
-npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+    # run all tests
+    npm test

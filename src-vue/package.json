@@ -14,6 +14,7 @@
     "compile-templates": "./node_modules/handlebars/bin/handlebars -m src/filegenerator/templates/ -f src/filegenerator/templates/templates.js && sed -i '1iimport Handlebars from \"handlebars/runtime\"' src/filegenerator/templates/templates.js"
   },
   "dependencies": {
+    "mqtt": "^2.7.0",
     "vue": "^2.1.0",
     "vue-highlightjs": "^1.0.2",
     "vue-resource": "^1.1.0",

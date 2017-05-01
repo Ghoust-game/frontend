@@ -4,7 +4,9 @@
       <h1>Ghoust Game</h1>
     </header>
 
-    <router-view></router-view>
+    <div id="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -21,6 +23,10 @@ export default {
   methods: mapActions([
   ]),
   components: {
+  },
+  created: function () {
+    // `this` points to the vm instance. You can access the state store with `this.$store`
+    this.$store.dispatch('startMQTT')
   }
 }
 </script>
@@ -28,5 +34,8 @@ export default {
 <style>
 #app {
   margin: 20px 40px;
+}
+
+#content {
 }
 </style>

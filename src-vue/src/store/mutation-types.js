@@ -1,1 +1,5 @@
 export const SET_IS_LOADING = 'SET_IS_LOADING'
+export const CLIENT_ADD = 'CLIENT_ADD'
+export const CLIENT_REMOVE = 'CLIENT_REMOVE'
+export const SET_LABEL = 'SET_LABEL'
+export const SET_BATTERY_LEVEL = 'SET_BATTERY_LEVEL'

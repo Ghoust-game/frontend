@@ -23,9 +23,5 @@ new Vue({
   el: '#app',
   store,
   router,
-  render: h => h(App),
-  created: function () {
-    // `this` points to the vm instance. You can access the state store with `this.$store`
-    console.log('created!', this, this.state)
-  }
+  render: h => h(App)
 })
