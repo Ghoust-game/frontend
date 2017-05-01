@@ -3,6 +3,7 @@ Ghoust frontend
 * Uses [Vue.js](https://vuejs.org/), incl. vuex and vue-router
 * Official [mqtt.js client](https://www.npmjs.com/package/mqtt) npm lib
 
+
 # Getting started
 
 Install the dependencies and start the dev server:
@@ -14,6 +15,8 @@ Install the dependencies and start the dev server:
 
     # serve dev server with hot reload at localhost:8080
     npm run dev
+
+It is recommended to install the Chrome developer tools Vue.js plugin
 
 More commands:
 
@@ -28,3 +31,8 @@ More commands:
 
     # run all tests
     npm test
+
+
+## MQTT
+
+For list of topics and events, see https://github.com/Ghoust-game/ghoust/wiki/MQTT-tree
