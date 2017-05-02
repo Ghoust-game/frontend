@@ -22,6 +22,10 @@ Install the dependencies and start the dev server:
     # run the dev server with hot reload at localhost:8080
     $ npm run dev
 
+### MQTT Broker
+
+For testing and development it may be useful to run a local [Mosquitto MQTT broker](https://mosquitto.org/) for the web frontend to connect to. Be sure to enable the websocket protocol in the Mosquitto config, and to point the JavaScript client to that broker (see [src/settings.js](https://github.com/Ghoust-game/frontend/blob/master/src/src/settings.js)).
+
 ### Vue DevTools
 
 It is recommended to install the Chrome developer tools [Vue.js plugin](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
