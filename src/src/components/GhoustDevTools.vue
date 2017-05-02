@@ -1,6 +1,6 @@
 <template>
     <div class="ghoust-dev-tools" v-show="ghoustDevToolsVisible">
-      <h3>Ghoust DevTools</h3>
+      <h3>Developer Tools</h3>
       <div style="margin:20px;">
           <label for="sendMqttMessage">Publish MQTT message:</label><br>
           <input type="text" id="sendMqttTopic" ref="sendMqttTopic" class="form-control" placeholder="MQTT topic" />

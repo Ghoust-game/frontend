@@ -7,15 +7,16 @@
 
     <GhoustDevTools></GhoustDevTools>
 
-    <div id="content">
-      <router-view></router-view>
-    </div>
+    <Overview></Overview>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+
 import GhoustDevTools from './components/GhoustDevTools'
+import Overview from './components/Overview'
+
 import * as types from './store/mutation-types'
 import * as Mousetrap from 'mousetrap'
 
@@ -25,12 +26,13 @@ export default {
     'getMqttState',
     'isMqttConnected'
   ]),
-  components: {
-    GhoustDevTools
-  },
-  created: function () {
-    // `this` points to the vm instance. You can access the state store with `this.$store`
 
+  components: {
+    GhoustDevTools,
+    Overview
+  },
+
+  created: function () {
     // start MQTT client
     this.$store.dispatch('startMQTT')
 
@@ -46,9 +48,6 @@ export default {
 <style>
 #app {
   margin: 20px 40px;
-}
-
-#content {
 }
 
 .mqtt-state.mqtt-state-connected {
