@@ -2,53 +2,81 @@
 // asynchronous operations.
 
 import * as types from './mutation-types'
-import { MOSQUITTO_URL } from '../settings'
+import { MQTT_URL } from '../settings'
 import mqtt from 'mqtt'
 
 import Vue from 'vue'
 import Resource from 'vue-resource'
+import * as consts from './constants'
 
 Vue.use(Resource)
 
 let mqttClient = null
 
-export const testAction = ({ commit, state }) => {
-  commit(types.SET_IS_LOADING, true)
-}
-
 export const startMQTT = ({ commit, state }) => {
-  console.log('start')
-  mqttClient = mqtt.connect(MOSQUITTO_URL)
+  mqttClient = mqtt.connect(MQTT_URL)
+  commit(types.SET_MQTT_STATE, consts.MQTT_STATE_CONNECTING)
+  console.log('mqtt connecting to ' + MQTT_URL)
 
   mqttClient.on('connect', function () {
+    console.log('mqtt connected')
+    commit(types.SET_MQTT_STATE, consts.MQTT_STATE_CONNECTED)
     mqttClient.subscribe('#')
-    // client.publish('presence', 'Hello mqtt')
+  })
+
+  mqttClient.on('reconnect', function () {
+    // reconnect starts
+    console.info('mqtt reconnecting...')
+    commit(types.SET_MQTT_STATE, consts.MQTT_STATE_CONNECTING)
+  })
+
+  mqttClient.on('close', function () {
+    console.warn('mqtt disconnected')
+    commit(types.SET_MQTT_STATE, consts.MQTT_STATE_OFFLINE)
+  })
+
+  mqttClient.on('offline', function () {
+    console.warn('mqtt went offline')
+    commit(types.SET_MQTT_STATE, consts.MQTT_STATE_OFFLINE)
+  })
+
+  mqttClient.on('error', function (error) {
+    console.error('mqtt error', error)
+    commit(types.SET_MQTT_ERROR, error)
+    commit(types.SET_MQTT_STATE, consts.MQTT_STATE_ERROR)
   })
 
   mqttClient.on('message', function (topic, message) {
     // message is Buffer
     const msg = message.toString()
-    console.log(topic, msg)
+    console.log(`mqtt message received. topic: ${topic}, msg: ${msg}`)
+    mqttMessageReceived({ commit, state }, { topic, msg })
+  })
+}
 
-    const topics = topic.split('/')
-    // console.log(topics)
+export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
+  const topics = topic.split('/')
+  // console.log(topics)
 
-    // Extract parts of the topic and process
-    const clientId = topics[2]
-    const clientTopic = topics[3]
-    console.log(clientId, 'clientTopic:', clientTopic, 'msg:', msg)
+  // Extract parts of the topic and process
+  const clientId = topics[2]
+  const clientTopic = topics[3]
+  // console.log(clientId, 'clientTopic:', clientTopic, 'msg:', msg)
 
-    if (clientTopic === 'status') {
-      if (msg === 'CONNECTED') {
-        commit(types.CLIENT_ADD, clientId)
-      } else if (msg === 'DISCONNECTED') {
-        commit(types.CLIENT_REMOVE, clientId)
-      }
-    } else if (clientTopic === 'events') {
-      console.log('event', topics[4], 'value:', msg)
+  if (clientTopic === 'status') {
+    if (msg === 'CONNECTED') {
+      commit(types.CLIENT_ADD, clientId)
+    } else if (msg === 'DISCONNECTED') {
+      commit(types.CLIENT_REMOVE, clientId)
+    }
+  } else if (clientTopic === 'events') {
+    const eventType = topics[4]
+    console.log('event', eventType, 'value:', msg)
+
+    if (eventType === 'battery') {
       commit(types.SET_BATTERY_LEVEL, { clientId, batteryLevel: msg })
     }
-  })
+  }
 }
 
 export const sendToClient = ({ commit, state }, { topic, message }) => {

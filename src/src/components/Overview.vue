@@ -1,11 +1,14 @@
 <template>
-    <div>
-      <h3>Clients</h3>
+    <div v-if="isMqttConnected">
 
+      <h3>Clients</h3>
       <div class="client-list">
         <div class="client" v-for="client in getClients">
           <h4>{{ client.label }}</h4>
-          <div class="batteryLevel">Battery: {{ client.batteryLevel }}</div>
+          <div class="batteryLevel">
+            Battery: {{ client.batteryLevel }}<br>
+            <img src="../assets/battery-low.jpg" style="width:60px;" v-show="client.batteryLevel < 450" />
+          </div>
 
           <button @click="setLabel(client.id)" class="btn btn-default">Set label</button>
           <button @click="setColorRed(client.id)" class="btn btn-default">Set color to red for 2s</button>
@@ -21,7 +24,8 @@ import * as types from '../store/mutation-types'
 
 export default {
   computed: mapGetters([
-    'getClients'
+    'getClients',
+    'isMqttConnected'
   ]),
 
   methods: {

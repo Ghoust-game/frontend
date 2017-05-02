@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
 import * as types from './mutation-types'
-// import * as consts from './constants'
+import * as consts from './constants'
 
 Vue.use(Vuex)
 
@@ -11,7 +11,10 @@ Vue.use(Vuex)
 const state = {
   // ui state
   isLoading: false,
-  clients: []
+  clients: [],
+  mqttState: consts.MQTT_STATE_OFFLINE,
+  mqttError: null,
+  ghoustDevToolsVisible: false
 }
 
 // mutations are operations that actually mutates the state.
@@ -56,14 +59,36 @@ const mutations = {
         client.batteryLevel = batteryLevel
       }
     })
+  },
+
+  [types.SET_MQTT_STATE] (state, mqttState) {
+    state.mqttState = mqttState
+  },
+
+  [types.SET_MQTT_ERROR] (state, error) {
+    state.mqttError = error
+  },
+
+  [types.SET_GHOUST_DEV_TOOLS_VISIBLE] (state, isVisible) {
+    state.ghoustDevToolsVisible = isVisible
+  },
+
+  [types.TOGGLE_GHOUST_DEV_TOOLS_VISIBLE] (state) {
+    state.ghoustDevToolsVisible = !state.ghoustDevToolsVisible
   }
 }
 
 // getters are functions
 const getters = {
   isLoading: state => state.isLoading,
+  ghoustDevToolsVisible: state => state.ghoustDevToolsVisible,
   currentRoutePath: state => state.route.fullPath,
-  getClients: state => state.clients
+
+  getClients: state => state.clients,
+
+  isMqttConnected: state => state.mqttState === consts.MQTT_STATE_CONNECTED,
+  getMqttState: state => state.mqttState,
+  getMqttError: state => state.mqttError
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

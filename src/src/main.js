@@ -3,13 +3,11 @@
 import Vue from 'vue'
 import store from './store'
 import VueRouter from 'vue-router'
-import VueHighlightJS from 'vue-highlightjs'
 import { sync } from 'vuex-router-sync'
 import { routes } from './route-config'
 
 import App from './App'
 
-Vue.use(VueHighlightJS)
 Vue.use(VueRouter)
 
 // Setup router
