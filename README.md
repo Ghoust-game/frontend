@@ -1,4 +1,7 @@
-Ghoust frontend
+# Ghoust frontend
+
+[![Build Status](https://travis-ci.org/Ghoust-game/frontend.svg?branch=master)](https://travis-ci.org/Ghoust-game/frontend)
+
 
 * Uses [Vue.js](https://vuejs.org/), incl. vuex and vue-router
 * Official [mqtt.js client](https://www.npmjs.com/package/mqtt) npm lib

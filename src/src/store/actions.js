@@ -2,7 +2,6 @@
 // asynchronous operations.
 
 import * as types from './mutation-types'
-import { MQTT_URL } from '../settings'
 import mqtt from 'mqtt'
 
 import Vue from 'vue'
@@ -14,9 +13,9 @@ Vue.use(Resource)
 let mqttClient = null
 
 export const startMQTT = ({ commit, state }) => {
-  mqttClient = mqtt.connect(MQTT_URL)
+  mqttClient = mqtt.connect(state.mqttUrl)
   commit(types.SET_MQTT_STATE, consts.MQTT_STATE_CONNECTING)
-  console.log('mqtt connecting to ' + MQTT_URL)
+  console.log('mqtt connecting to ' + state.mqttUrl)
 
   mqttClient.on('connect', function () {
     console.log('mqtt connected')
@@ -52,6 +51,20 @@ export const startMQTT = ({ commit, state }) => {
     console.log(`mqtt message received. topic: ${topic}, msg: ${msg}`)
     mqttMessageReceived({ commit, state }, { topic, msg })
   })
+}
+
+export const restartMQTT = ({ commit, state }) => {
+  // Terminate an existing connection
+  if (mqttClient) {
+    mqttClient.end()
+    mqttClient = null
+  }
+
+  // Remove old clients
+  commit(types.CLIENTS_CLEAR)
+
+  // Restart mqtt connection
+  startMQTT({ commit, state })
 }
 
 export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {

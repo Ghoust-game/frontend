@@ -2,7 +2,16 @@
     <div class="ghoust-dev-tools" v-show="ghoustDevToolsVisible">
       <h3>Developer Tools</h3>
       <div style="margin:20px;">
-          <label for="sendMqttMessage">Publish MQTT message:</label><br>
+        <div class="form-group form-inline">
+          <label for="mqttUrl">MQTT Url:</label>
+          <input type="text" id="mqttUrl" ref="mqttUrl" class="form-control" placeholder="MQTT URL" :value="getMqttUrl" />
+          <button type="submit" class="btn btn-primary" @click="setMqttUrl">Update</button>
+        </div>
+
+        <hr>
+
+        <div>
+          <label for="sendMqttTopic">Publish MQTT message:</label><br>
           <input type="text" id="sendMqttTopic" ref="sendMqttTopic" class="form-control" placeholder="MQTT topic" />
           <input type="text" id="sendMqttMessage" ref="sendMqttMessage" class="form-control" placeholder="MQTT message" />
           <button type="submit" class="btn btn-primary" @click="publishMqttMessage">Publish</button>
@@ -11,21 +20,35 @@
             <a href="#" @click="setExampleMessageOutshock">Event: Outshock</a>,
             <a href="#" @click="setExampleMessageBatteryDanger">Event: Battery Low</a>,
             <a href="https://github.com/Ghoust-game/ghoust/wiki/MQTT-tree" target="_blank">more</a>
+        </div>
       </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import * as types from '../store/mutation-types'
 
 export default {
   computed: mapGetters([
-    'ghoustDevToolsVisible'
+    'ghoustDevToolsVisible',
+    'getMqttUrl'
   ]),
   methods: {
+    setMqttUrl () {
+      const url = this.$refs.mqttUrl.value
+      console.log('set mqtt url', url)
+      this.$store.commit(types.SET_MQTT_URL, url)
+      this.$store.dispatch('restartMQTT')
+    },
+
     publishMqttMessage (clientId) {
       const topic = this.$refs.sendMqttTopic.value
       const message = this.$refs.sendMqttMessage.value
+      if (!topic) {
+        window.alert('MQTT message needs a topic')
+        return
+      }
       console.log('send', topic, message)
       this.$store.dispatch('sendToClient', { topic, message })
     },

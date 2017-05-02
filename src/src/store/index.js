@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as types from './mutation-types'
 import * as consts from './constants'
+import { MQTT_URL } from '../settings'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ const state = {
   clients: [],
   mqttState: consts.MQTT_STATE_OFFLINE,
   mqttError: null,
+  mqttUrl: MQTT_URL,
   ghoustDevToolsVisible: false
 }
 
@@ -69,12 +71,16 @@ const mutations = {
     state.mqttError = error
   },
 
-  [types.SET_GHOUST_DEV_TOOLS_VISIBLE] (state, isVisible) {
-    state.ghoustDevToolsVisible = isVisible
+  [types.SET_MQTT_URL] (state, url) {
+    state.mqttUrl = url
   },
 
   [types.TOGGLE_GHOUST_DEV_TOOLS_VISIBLE] (state) {
     state.ghoustDevToolsVisible = !state.ghoustDevToolsVisible
+  },
+
+  [types.CLIENTS_CLEAR] (state) {
+    state.clients = []
   }
 }
 
@@ -82,13 +88,14 @@ const mutations = {
 const getters = {
   isLoading: state => state.isLoading,
   ghoustDevToolsVisible: state => state.ghoustDevToolsVisible,
-  currentRoutePath: state => state.route.fullPath,
+  // currentRoutePath: state => state.route.fullPath,
 
   getClients: state => state.clients,
 
   isMqttConnected: state => state.mqttState === consts.MQTT_STATE_CONNECTED,
   getMqttState: state => state.mqttState,
-  getMqttError: state => state.mqttError
+  getMqttError: state => state.mqttError,
+  getMqttUrl: state => state.mqttUrl
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

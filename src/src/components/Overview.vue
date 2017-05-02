@@ -1,10 +1,12 @@
 <template>
     <div v-if="isMqttConnected">
-
       <h3>Clients</h3>
+
       <div class="client-list">
+
         <div class="client" v-for="client in getClients">
           <h4>{{ client.label }}</h4>
+
           <div class="batteryLevel">
             Battery: {{ client.batteryLevel }}<br>
             <img src="../assets/battery-low.jpg" style="width:60px;" v-show="client.batteryLevel < 450" />
