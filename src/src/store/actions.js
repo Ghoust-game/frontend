@@ -13,6 +13,11 @@ Vue.use(Resource)
 let mqttClient = null
 
 export const startMQTT = ({ commit, state }) => {
+  if (!state.mqttUrl) {
+    const host = window.location.hostname
+    commit(types.SET_MQTT_URL, `mqtt://${host}:1884`)
+    console.log('set initial mqtt url', state.mqttUrl)
+  }
   mqttClient = mqtt.connect(state.mqttUrl)
   commit(types.SET_MQTT_STATE, consts.MQTT_STATE_CONNECTING)
   console.log('mqtt connecting to ' + state.mqttUrl)
