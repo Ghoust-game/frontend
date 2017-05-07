@@ -101,6 +101,15 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
       })
       console.log('active games', gameInstances)
       commit(types.SET_GAME_INSTANCES, gameInstances)
+      return
+    }
+
+    if (messageType === 'version') {
+      if (messageSubtype === 'current') {
+        commit(types.SET_VERSION_CURRENT, msg)
+      } else if (messageSubtype === 'latest') {
+        commit(types.SET_VERSION_LATEST, msg)
+      }
     }
 
     return

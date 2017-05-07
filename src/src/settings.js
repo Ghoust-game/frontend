@@ -9,7 +9,7 @@ let settings = {
 
 if (IS_DEV) {
   // settings.MQTT_URL = 'mqtt://localhost:1883'
-  // settings.MQTT_URL = 'mqtt://10.20.32.173:1884'
+  settings.MQTT_URL = 'mqtt://10.20.32.173:1884'
 } else if (IS_PRODUCTION) {
   // settings.MQTT_URL = 'mqtt://localhost:1884'
 } else {

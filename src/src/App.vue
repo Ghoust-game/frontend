@@ -3,6 +3,9 @@
     <header>
       <h1>Ghoust Game</h1>
       <div class="mqtt-state" v-bind:class="{ 'mqtt-state-connected': isMqttConnected }">MQTT state: {{ getMqttState }}</div>
+      <div v-if="isSoftwareUpdateAvailable" class="software-update-available">
+        <button type="button" class="btn btn-success">Available Updates: 1</button>
+      </div>
     </header>
 
     <GhoustDevTools></GhoustDevTools>
@@ -36,7 +39,8 @@ const HOTKEY_MESSAGES = {
 export default {
   computed: mapGetters([
     'getMqttState',
-    'isMqttConnected'
+    'isMqttConnected',
+    'isSoftwareUpdateAvailable'
   ]),
 
   components: {
@@ -75,5 +79,9 @@ export default {
 
 .mqtt-state.mqtt-state-connected {
   color: green;
+}
+
+.software-update-available {
+  margin: 20px 0px;
 }
 </style>

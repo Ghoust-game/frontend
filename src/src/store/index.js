@@ -18,7 +18,11 @@ const state = {
   mqttUrl: MQTT_URL,
   gameModes: [],
   gameInstances: [],
-  ghoustDevToolsVisible: false
+  ghoustDevToolsVisible: false,
+
+  // Messages from the updater service
+  softwareCurrentVersion: '1',
+  softwareLatestVersion: ''
 }
 
 // mutations are operations that actually mutates the state.
@@ -89,6 +93,14 @@ const mutations = {
     state.gameModes = gameModes
   },
 
+  [types.SET_VERSION_CURRENT] (state, versionCurrent) {
+    state.softwareCurrentVersion = versionCurrent
+  },
+
+  [types.SET_VERSION_LATEST] (state, versionLatest) {
+    state.softwareCurrentVersion = versionLatest
+  },
+
   [types.SET_GAME_INSTANCES] (state, gameInstances) {
     state.gameInstances = gameInstances
   }
@@ -108,7 +120,12 @@ const getters = {
   getMqttUrl: state => state.mqttUrl,
 
   getGameModes: state => state.gameModes,
-  getGameInstances: state => state.gameInstances
+  getGameInstances: state => state.gameInstances,
+  getSoftwareCurrentVersion: state => state.softwareCurrentVersion,
+  getSoftwareLatestVersion: state => state.softwareLatestVersion,
+  isSoftwareUpdateAvailable: (state) => {
+    return state.softwareCurrentVersion !== state.softwareLatestVersion
+  }
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,
