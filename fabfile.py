@@ -8,10 +8,9 @@ chdir(here)
 
 DIR_REMOTE = "/server/webserver/frontend"
 
-
-# Set default hosts
-if not env.hosts:
-    env.hosts = ["ghoust"]
+# Set the ssh hosts and username
+env.hosts = ["ghoust.local"]
+env.user = "ghoust"
 
 
 def clean():
@@ -20,6 +19,7 @@ def clean():
 
 
 def build():
+    """ Build the sources with 'npm run build' """
     local("npm run build")
 
 
