@@ -10,7 +10,7 @@ DIR_REMOTE = "/server/webserver/frontend"
 
 # Set the ssh hosts and username
 env.hosts = ["ghoust.local"]
-env.user = "ghoust"
+env.user = "root"
 
 
 def clean():
@@ -25,11 +25,12 @@ def build():
 
 def upload():
     """ Uploads source to raspberrypi """
-    # sudo("rw")
+    sudo("rw")
     sudo("rm -rf /tmp/dist")
     put("src/dist", "/tmp/")
     sudo("rm -rf %s" % DIR_REMOTE)
     sudo("mv /tmp/dist %s" % DIR_REMOTE)
+    # sudo("ro")
 
 
 def deploy():

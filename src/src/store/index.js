@@ -16,6 +16,8 @@ const state = {
   mqttState: consts.MQTT_STATE_OFFLINE,
   mqttError: null,
   mqttUrl: MQTT_URL,
+  gameModes: [],
+  gameInstances: [],
   ghoustDevToolsVisible: false
 }
 
@@ -81,6 +83,14 @@ const mutations = {
 
   [types.CLIENTS_CLEAR] (state) {
     state.clients = []
+  },
+
+  [types.SET_GAME_MODES] (state, gameModes) {
+    state.gameModes = gameModes
+  },
+
+  [types.SET_GAME_INSTANCES] (state, gameInstances) {
+    state.gameInstances = gameInstances
   }
 }
 
@@ -95,7 +105,10 @@ const getters = {
   isMqttConnected: state => state.mqttState === consts.MQTT_STATE_CONNECTED,
   getMqttState: state => state.mqttState,
   getMqttError: state => state.mqttError,
-  getMqttUrl: state => state.mqttUrl
+  getMqttUrl: state => state.mqttUrl,
+
+  getGameModes: state => state.gameModes,
+  getGameInstances: state => state.gameInstances
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

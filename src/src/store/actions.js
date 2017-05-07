@@ -69,12 +69,37 @@ export const restartMQTT = ({ commit, state }) => {
 
 export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
   const topics = topic.split('/')
-  // console.log(topics)
+  console.log(topics)
 
   // Extract parts of the topic and process
+  const topicType = topics[1]
   const clientId = topics[2]
   const clientTopic = topics[3]
   // console.log(clientId, 'clientTopic:', clientTopic, 'msg:', msg)
+
+  if (topicType === 'server') {
+    const messageType = topics[2]
+    const messageSubtype = topics[3]
+    console.log('server msg', messageType)
+
+    if (messageType === 'status' && messageSubtype === 'gamemodes') {
+      const gameModes = msg.split(',')
+      console.log('modes', gameModes)
+      commit(types.SET_GAME_MODES, gameModes)
+      return
+    }
+
+    if (messageType === 'status' && messageSubtype === 'activegames') {
+      const gameInstances = msg.split(',').map((s) => {
+        const [id, name] = s.split(':')
+        return { id, name }
+      })
+      console.log('active games', gameInstances)
+      commit(types.SET_GAME_INSTANCES, gameInstances)
+    }
+
+    return
+  }
 
   if (clientTopic === 'status') {
     if (msg === 'CONNECTED') {
@@ -95,4 +120,9 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
 export const sendToClient = ({ commit, state }, { topic, message }) => {
   console.log('sendMqttMessage', topic, message)
   mqttClient.publish(topic, message)
+}
+
+export const mqttStartGame = ({ commit, state }, gameMode) => {
+  console.log('mqttStartGame', gameMode)
+  mqttClient.publish('GHOUST/server/changegame', gameMode)
 }

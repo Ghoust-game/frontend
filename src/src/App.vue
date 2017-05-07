@@ -7,6 +7,9 @@
 
     <GhoustDevTools></GhoustDevTools>
 
+    <GameModeList></GameModeList>
+    <GameInstanceList></GameInstanceList>
+
     <Overview></Overview>
   </div>
 </template>
@@ -16,6 +19,8 @@ import { mapGetters } from 'vuex'
 
 import GhoustDevTools from './components/GhoustDevTools'
 import Overview from './components/Overview'
+import GameModeList from './components/GameModeList'
+import GameInstanceList from './components/GameInstanceList'
 
 import * as types from './store/mutation-types'
 import * as Mousetrap from 'mousetrap'
@@ -36,7 +41,9 @@ export default {
 
   components: {
     GhoustDevTools,
-    Overview
+    Overview,
+    GameModeList,
+    GameInstanceList
   },
 
   created: function () {
