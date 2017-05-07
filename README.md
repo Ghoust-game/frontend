@@ -37,8 +37,7 @@ It is recommended to install the Chrome developer tools [Vue.js plugin](https://
 
 ### More commands:
 
-    # build for production with minification
-    # production build will be saved in src/dist/
+    # build for production with minification. output will be saved in src/dist/
     $ npm run build
 
     # run unit tests
