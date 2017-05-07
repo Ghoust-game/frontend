@@ -30,3 +30,10 @@ def upload():
     put("src/dist", "/tmp/")
     sudo("rm -rf %s" % DIR_REMOTE)
     sudo("mv /tmp/dist %s" % DIR_REMOTE)
+
+
+def deploy():
+    """ Clean, Build and Upload to Pi """
+    clean()
+    build()
+    upload()
