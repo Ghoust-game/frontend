@@ -89,6 +89,11 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
     const messageSubtype = topics[3]
     console.log('server type', messageType, 'subtype', messageSubtype)
 
+    if (messageType === 'updated-performed') {
+      console.info('update complete')
+      commit(types.SET_IS_INSTALLING_UPDATE, false)
+    }
+
     if (messageType === 'status' && messageSubtype === 'gamemodes') {
       const gameModes = msg.split(',')
       console.log('modes', gameModes)
@@ -122,6 +127,7 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
           version: msg
         })
       }
+      return
     }
 
     return

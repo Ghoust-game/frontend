@@ -28,7 +28,8 @@ import * as types from '../store/mutation-types'
 export default {
   computed: mapGetters([
     'isInstallingUpdate',
-    'getSoftwareComponents'
+    'getSoftwareComponents',
+    'isInstallingUpdate'
   ]),
   methods: {
     installUpdate (sender) {
