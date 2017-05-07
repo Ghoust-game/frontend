@@ -21,8 +21,8 @@ const state = {
   ghoustDevToolsVisible: false,
 
   // Messages from the updater service
-  softwareCurrentVersion: '1',
-  softwareLatestVersion: ''
+  softwareComponents: [],
+  softwareIsInstallingUpdate: false
 }
 
 // mutations are operations that actually mutates the state.
@@ -93,16 +93,44 @@ const mutations = {
     state.gameModes = gameModes
   },
 
-  [types.SET_VERSION_CURRENT] (state, versionCurrent) {
-    state.softwareCurrentVersion = versionCurrent
-  },
-
-  [types.SET_VERSION_LATEST] (state, versionLatest) {
-    state.softwareCurrentVersion = versionLatest
-  },
-
   [types.SET_GAME_INSTANCES] (state, gameInstances) {
     state.gameInstances = gameInstances
+  },
+
+  // [types.SET_VERSION_CURRENT] (state, versionCurrent) {
+  //   state.softwareCurrentVersion = versionCurrent
+  // },
+
+  [types.SET_SOFTWARE_COMPONENT_VERSION_CURRENT] (state, { name, version }) {
+    for (let component of state.softwareComponents) {
+      if (component.name === name) {
+        component.versionCurrent = version
+        return
+      }
+    }
+
+    state.softwareComponents.push({
+      name,
+      versionCurrent: version
+    })
+  },
+
+  [types.SET_SOFTWARE_COMPONENT_VERSION_LATEST] (state, { name, version }) {
+    for (let component of state.softwareComponents) {
+      if (component.name === name) {
+        component.versionLatest = version
+        return
+      }
+    }
+
+    state.softwareComponents.push({
+      name,
+      versionLatest: version
+    })
+  },
+
+  [types.SET_IS_INSTALLING_UPDATE] (state, isInstallingUpdate) {
+    state.softwareIsInstallingUpdate = isInstallingUpdate
   }
 }
 
@@ -121,11 +149,16 @@ const getters = {
 
   getGameModes: state => state.gameModes,
   getGameInstances: state => state.gameInstances,
-  getSoftwareCurrentVersion: state => state.softwareCurrentVersion,
-  getSoftwareLatestVersion: state => state.softwareLatestVersion,
+  getSoftwareComponents: state => state.softwareComponents,
   isSoftwareUpdateAvailable: (state) => {
-    return state.softwareCurrentVersion !== state.softwareLatestVersion
-  }
+    for (let component of state.softwareComponents) {
+      if (component.versionCurrent !== component.versionLatest) {
+        return true
+      }
+    }
+    return false
+  },
+  isInstallingUpdate: state => state.softwareIsInstallingUpdate
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

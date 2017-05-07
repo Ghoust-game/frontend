@@ -2,24 +2,24 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import store from './store'
-// import VueRouter from 'vue-router'
-// import { sync } from 'vuex-router-sync'
-// import { routes } from './route-config'
+import VueRouter from 'vue-router'
+import { sync } from 'vuex-router-sync'
+import { routes } from './route-config'
 
 import App from './App'
 
-// Vue.use(VueRouter)
+Vue.use(VueRouter)
 
 // Setup router
-// const router = new VueRouter({ routes })
+const router = new VueRouter({ routes })
 
 // Setup vuex router sync
-// sync(store, router)
+sync(store, router)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   store,
-  // router,
+  router,
   render: h => h(App)
 })

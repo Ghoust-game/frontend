@@ -1,8 +1,7 @@
-// // import Home from './components/Home'
-// import Overview from './components/Overview'
-// import About from './components/About'
+import Home from './routes/Home'
+import Update from './routes/Update'
 
-// export const routes = [
-//   { path: '/', component: Overview },
-//   { path: '/about', component: About }
-// ]
+export const routes = [
+  { path: '/', component: Home },
+  { path: '/update', component: Update }
+]

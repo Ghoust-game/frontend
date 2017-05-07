@@ -83,9 +83,11 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
   // console.log(clientId, 'clientTopic:', clientTopic, 'msg:', msg)
 
   if (topicType === 'server') {
+    console.log('server msg', topics)
+
     const messageType = topics[2]
     const messageSubtype = topics[3]
-    console.log('server msg', messageType)
+    console.log('server type', messageType, 'subtype', messageSubtype)
 
     if (messageType === 'status' && messageSubtype === 'gamemodes') {
       const gameModes = msg.split(',')
@@ -105,10 +107,20 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
     }
 
     if (messageType === 'version') {
-      if (messageSubtype === 'current') {
-        commit(types.SET_VERSION_CURRENT, msg)
-      } else if (messageSubtype === 'latest') {
-        commit(types.SET_VERSION_LATEST, msg)
+      const componentName = topics[3]
+      const infoType = topics[4]
+      if (infoType === 'current') {
+        console.log('server version current', componentName, msg)
+        commit(types.SET_SOFTWARE_COMPONENT_VERSION_CURRENT, {
+          name: componentName,
+          version: msg
+        })
+      } else if (infoType === 'latest') {
+        console.log('server version latest', componentName, msg)
+        commit(types.SET_SOFTWARE_COMPONENT_VERSION_LATEST, {
+          name: componentName,
+          version: msg
+        })
       }
     }
 

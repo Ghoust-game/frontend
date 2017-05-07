@@ -1,32 +1,19 @@
 <template>
   <div id="app">
     <header>
-      <h1>Ghoust Game</h1>
-      <div class="mqtt-state" v-bind:class="{ 'mqtt-state-connected': isMqttConnected }">MQTT state: {{ getMqttState }}</div>
-      <div v-if="isSoftwareUpdateAvailable" class="software-update-available">
-        <button type="button" class="btn btn-success">Available Updates: 1</button>
-      </div>
+      <router-link to="/"><h1>Ghoust Game</h1></router-link>
     </header>
 
-    <GhoustDevTools></GhoustDevTools>
-
-    <GameModeList></GameModeList>
-    <GameInstanceList></GameInstanceList>
-
-    <Overview></Overview>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
-import GhoustDevTools from './components/GhoustDevTools'
-import Overview from './components/Overview'
-import GameModeList from './components/GameModeList'
-import GameInstanceList from './components/GameInstanceList'
-
 import * as types from './store/mutation-types'
 import * as Mousetrap from 'mousetrap'
+import GhoustDevTools from './components/GhoustDevTools'
 
 // hotkeys for sending mqtt messages. property is the hotkey, argument is [topic, message]
 const HOTKEY_MESSAGES = {
@@ -44,10 +31,7 @@ export default {
   ]),
 
   components: {
-    GhoustDevTools,
-    Overview,
-    GameModeList,
-    GameInstanceList
+    GhoustDevTools
   },
 
   created: function () {
@@ -55,6 +39,14 @@ export default {
     this.$store.dispatch('startMQTT')
 
     // register for keyboard events
+    Mousetrap.bind(['x'], () => {
+      this.$store.dispatch('sendToClient', {
+        topic: 'GHOUST/server/version/test/latest',
+        message: '123'
+      })
+      return false
+    })
+
     Mousetrap.bind(['d'], () => {
       this.$store.commit(types.TOGGLE_GHOUST_DEV_TOOLS_VISIBLE)
       return false
