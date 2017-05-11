@@ -4,6 +4,12 @@
     <div class="ghoust-dev-tools" v-show="ghoustDevToolsVisible">
       <h3>Developer Tools</h3>
       <div style="margin:20px;">
+      <span v-for="component in getSoftwareComponents" class='devtools-component-info'>
+        <b>{{ component.name }}</b> (current={{ component.versionCurrent }}, latest={{ component.versionLatest }})
+      </span>
+
+        <hr>
+
         <div class="form-group form-inline">
           <label for="mqttUrl">MQTT Url:</label>
           <input type="text" id="mqttUrl" ref="mqttUrl" class="form-control" placeholder="MQTT URL" :value="getMqttUrl" />
@@ -36,6 +42,7 @@ export default {
   name: 'GhoustDevTools',
   computed: mapGetters([
     'ghoustDevToolsVisible',
+    'getSoftwareComponents',
     'getMqttUrl'
   ]),
   methods: {
@@ -83,5 +90,10 @@ export default {
 <style>
 .ghoust-dev-tools {
   padding: 20px 0px;
+}
+
+.devtools-component-info {
+  padding-left: 4px;
+  padding-right: 4px;
 }
 </style>
