@@ -42,7 +42,9 @@ const mutations = {
     const client = {
       id: clientId,
       label: clientId,
-      batteryLevel: '?'
+      batteryLevel: '?',
+      wins: 0,
+      losses: 0
     }
     state.clients.push(client)
   },
@@ -51,6 +53,28 @@ const mutations = {
     state.clients = state.clients.filter((client) => {
       return client.id !== clientId
     })
+  },
+
+  [types.CLIENT_WIN] (state, clientId) {
+    for (var i = 0; i < state.clients.length; i++) {
+      if (state.clients[i].id === clientId) {
+        const client = state.clients[i]
+        client.wins++
+        Vue.set(state.clients, i, client)
+        return
+      }
+    }
+  },
+
+  [types.CLIENT_LOSE] (state, clientId) {
+    for (var i = 0; i < state.clients.length; i++) {
+      if (state.clients[i].id === clientId) {
+        const client = state.clients[i]
+        client.losses++
+        Vue.set(state.clients, i, client)
+        return
+      }
+    }
   },
 
   [types.SET_LABEL] (state, { clientId, label }) {

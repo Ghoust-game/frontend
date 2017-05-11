@@ -20,7 +20,8 @@ const HOTKEY_MESSAGES = {
   '1': ['GHOUST/clients/GHOUST_77-68/status', 'CONNECTED'],    // connected
   '0': ['GHOUST/clients/GHOUST_77-68/status', 'DISCONNECTED'],    // connected
   '2': ['GHOUST/clients/GHOUST_77-68/events/battery', '440'],  // battery low
-  '3': ['GHOUST/clients/GHOUST_77-68/events/accelerometer', 'OUTSHOCK (25.514)']  // outshock
+  '3': ['GHOUST/clients/GHOUST_77-68/events/accelerometer', 'OUTSHOCK (25.514)'],  // outshock
+  '4': ['GHOUST/clients/GHOUST_77-68/config/led', 'PRESET:1']  // rainbow
 }
 
 export default {

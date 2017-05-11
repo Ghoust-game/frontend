@@ -145,6 +145,17 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
 
     if (eventType === 'battery') {
       commit(types.SET_BATTERY_LEVEL, { clientId, batteryLevel: msg })
+    } else if (eventType === 'accelerometer') {
+      if (msg.indexOf('OUTSHOCK') > -1) {
+        commit(types.CLIENT_LOSE, clientId)
+      }
+    }
+  } else if (clientTopic === 'config') {
+    const configValue = topics[4]
+    if (configValue === 'led') {
+      if (msg.indexOf('PRESET:1') > -1) {
+        commit(types.CLIENT_WIN, clientId)
+      }
     }
   }
 }

@@ -11,7 +11,10 @@
             Battery: {{ client.batteryLevel }}<br>
             <img src="../assets/battery-low.jpg" style="width:60px;" v-show="client.batteryLevel < 450" />
           </div>
-
+          <div class="client-stats">
+            Wins: {{ client.wins }}<br>
+            Losses: {{ client.losses }}<br>
+          </div>
           <button @click="setLabel(client.id)" class="btn btn-default">Set label</button>
           <button @click="setColorRed(client.id)" class="btn btn-default">Set color to red for 2s</button>
         </div>
@@ -59,7 +62,7 @@ export default {
 
 .client {
   width: 200px;  /* Or whatever */
-  height: 200px; /* Or whatever */
+  height: 220px; /* Or whatever */
   padding: 10px 20px;
   margin: 20px;
   border: 1px solid gray;
