@@ -102,9 +102,11 @@ const mutations = {
   // },
 
   [types.SET_SOFTWARE_COMPONENT_VERSION_CURRENT] (state, { name, version }) {
-    for (let component of state.softwareComponents) {
-      if (component.name === name) {
+    for (var i = 0; i < state.softwareComponents.length; i++) {
+      if (state.softwareComponents[i].name === name) {
+        const component = state.softwareComponents[i]
         component.versionCurrent = version
+        Vue.set(state.softwareComponents, i, component)
         return
       }
     }
@@ -116,9 +118,12 @@ const mutations = {
   },
 
   [types.SET_SOFTWARE_COMPONENT_VERSION_LATEST] (state, { name, version }) {
-    for (let component of state.softwareComponents) {
-      if (component.name === name) {
+    // for (let component of state.softwareComponents) {
+    for (var i = 0; i < state.softwareComponents.length; i++) {
+      if (state.softwareComponents[i].name === name) {
+        const component = state.softwareComponents[i]
         component.versionLatest = version
+        Vue.set(state.softwareComponents, i, component)
         return
       }
     }
@@ -151,7 +156,9 @@ const getters = {
   getGameInstances: state => state.gameInstances,
   getSoftwareComponents: state => state.softwareComponents,
   isSoftwareUpdateAvailable: (state) => {
+    // console.log(state)
     for (let component of state.softwareComponents) {
+      // console.log(component.name, component.versionCurrent, component.versionLatest)
       if (component.versionCurrent !== component.versionLatest) {
         return true
       }
