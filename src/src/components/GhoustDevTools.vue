@@ -1,4 +1,6 @@
 <template>
+  <div>
+
     <div class="ghoust-dev-tools" v-show="ghoustDevToolsVisible">
       <h3>Developer Tools</h3>
       <div style="margin:20px;">
@@ -23,6 +25,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -30,6 +33,7 @@ import { mapGetters, mapActions } from 'vuex'
 import * as types from '../store/mutation-types'
 
 export default {
+  name: 'GhoustDevTools',
   computed: mapGetters([
     'ghoustDevToolsVisible',
     'getMqttUrl'

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="mqtt-state" v-bind:class="{ 'mqtt-state-connected': isMqttConnected }">MQTT state: {{ getMqttState }}</div>
-
     <div v-if="isSoftwareUpdateAvailable" class="software-update-available">
       <router-link to="/update">
         <button type="button" class="btn btn-success">Available Updates: 1</button>
@@ -23,6 +22,7 @@ import { mapGetters } from 'vuex'
 import Overview from '../components/Overview'
 import GameModeList from '../components/GameModeList'
 import GameInstanceList from '../components/GameInstanceList'
+import GhoustDevTools from '../components/GhoustDevTools'
 
 export default {
   computed: mapGetters([
@@ -31,7 +31,7 @@ export default {
     'isSoftwareUpdateAvailable'
   ]),
   components: {
-    Overview, GameModeList, GameInstanceList
+    Overview, GameModeList, GameInstanceList, GhoustDevTools
   }
 }
 </script>
