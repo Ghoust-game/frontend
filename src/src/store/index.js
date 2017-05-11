@@ -159,6 +159,11 @@ const getters = {
     // console.log(state)
     for (let component of state.softwareComponents) {
       // console.log(component.name, component.versionCurrent, component.versionLatest)
+      if (!component.versionCurrent || !component.versionLatest) {
+        // if only one property is received yet, don't update
+        continue
+      }
+
       if (component.versionCurrent !== component.versionLatest) {
         return true
       }

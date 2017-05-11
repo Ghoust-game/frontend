@@ -27,7 +27,7 @@
             <a href="#" @click="setExampleMessageConnect">Connect</a>,
             <a href="#" @click="setExampleMessageOutshock">Event: Outshock</a>,
             <a href="#" @click="setExampleMessageBatteryDanger">Event: Battery Low</a>,
-            <a href="https://github.com/Ghoust-game/ghoust/wiki/MQTT-tree" target="_blank">more</a>
+            <a href="https://github.com/Ghoust-game/docs/wiki/MQTT" target="_blank">more</a>
         </div>
       </div>
     </div>
