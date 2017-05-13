@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <router-link to="/"><h1>Ghoust Game</h1></router-link>
+      <router-link to="/"><h1 class="title-text">Ghoust Game</h1></router-link>
     </header>
 
     <router-view></router-view>
@@ -66,15 +66,16 @@ export default {
 </script>
 
 <style>
-#app {
-  margin: 20px 40px;
-}
-
 .mqtt-state.mqtt-state-connected {
   color: green;
 }
 
 .software-update-available {
   margin: 20px 0px;
+}
+
+.title-text {
+  text-align: center;
+  font-weight: 900;
 }
 </style>

@@ -1,24 +1,17 @@
 <template>
-  <div>
+    <div class="ghoust-dev-tools">
+      <div style="margin:20px;" class="row">
+        <span v-for="component in getSoftwareComponents" class='devtools-component-info'>
+          <b>{{ component.name }}</b> (current={{ component.versionCurrent }}, latest={{ component.versionLatest }})
+        </span>
 
-    <div class="ghoust-dev-tools" v-show="ghoustDevToolsVisible">
-      <h3>Developer Tools</h3>
-      <div style="margin:20px;">
-      <span v-for="component in getSoftwareComponents" class='devtools-component-info'>
-        <b>{{ component.name }}</b> (current={{ component.versionCurrent }}, latest={{ component.versionLatest }})
-      </span>
-
-        <hr>
-
-        <div class="form-group form-inline">
-          <label for="mqttUrl">MQTT Url:</label>
-          <input type="text" id="mqttUrl" ref="mqttUrl" class="form-control" placeholder="MQTT URL" :value="getMqttUrl" />
+        <div class="form-group form-inline col-sm-6">
+          <label for="mqttUrl">MQTT Url:</label><br>
+          <input type="text" id="mqttUrl" ref="mqttUrl" class="form-control" placeholder="MQTT URL" :value="getMqttUrl" /><br>
           <button type="submit" class="btn btn-primary" @click="setMqttUrl">Update</button>
         </div>
 
-        <hr>
-
-        <div>
+        <div class="col-sm-6">
           <label for="sendMqttTopic">Publish MQTT message:</label><br>
           <input type="text" id="sendMqttTopic" ref="sendMqttTopic" class="form-control" placeholder="MQTT topic" />
           <input type="text" id="sendMqttMessage" ref="sendMqttMessage" class="form-control" placeholder="MQTT message" />
@@ -31,7 +24,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -89,7 +81,14 @@ export default {
 
 <style>
 .ghoust-dev-tools {
-  padding: 20px 0px;
+  box-shadow: 0px 0px 17px -3px rgba(0,0,0,0.67);
+  position: absolute;
+  bottom: 0;
+  height: 20%;
+  width: 100%;
+  overflow-y: scroll;
+  background-color: #262626;
+  color: #cdcdcd;
 }
 
 .devtools-component-info {
