@@ -57,10 +57,11 @@ body {
 
 .infobar-static {
   bottom: 0;
-  z-index: -1;
+  z-index: 0;
 }
 .infobar-animated {
   bottom: 20%;
+  z-index: 3;
 }
 
 .slide-info-bar-enter-active {

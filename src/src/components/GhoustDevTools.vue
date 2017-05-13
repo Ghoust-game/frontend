@@ -87,8 +87,9 @@ export default {
   height: 20%;
   width: 100%;
   overflow-y: scroll;
-  background-color: #262626;
-  color: #cdcdcd;
+  background-color: #E0E0E0;
+  color: rgba(0,0,0,.87);
+  z-index: 2;
 }
 
 .devtools-component-info {
