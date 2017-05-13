@@ -42,9 +42,10 @@ const mutations = {
     const client = {
       id: clientId,
       label: clientId,
+      alive: true, // hacky implementation
       batteryLevel: '?',
-      wins: 0,
-      losses: 0
+      wins: 0, // hacky implementation
+      losses: 0 // hacky implementation
     }
     state.clients.push(client)
   },
@@ -57,13 +58,14 @@ const mutations = {
 
   [types.CLIENT_WIN] (state, clientId) {
     for (var i = 0; i < state.clients.length; i++) {
-      if (state.clients[i].id === clientId) {
-        const client = state.clients[i]
+      const client = state.clients[i]
+      client.alive = true
+      if (client.id === clientId) {
         client.wins++
-        Vue.set(state.clients, i, client)
-        return
       }
+      Vue.set(state.clients, i, client)
     }
+    return
   },
 
   [types.CLIENT_LOSE] (state, clientId) {
@@ -71,6 +73,7 @@ const mutations = {
       if (state.clients[i].id === clientId) {
         const client = state.clients[i]
         client.losses++
+        client.alive = false
         Vue.set(state.clients, i, client)
         return
       }

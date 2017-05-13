@@ -84,7 +84,7 @@ export default {
   box-shadow: 0px 0px 17px -3px rgba(0,0,0,0.67);
   position: absolute;
   bottom: 0;
-  height: 20%;
+  height: 25vh;
   width: 100%;
   overflow-y: scroll;
   background-color: #E0E0E0;

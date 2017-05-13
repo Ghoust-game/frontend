@@ -1,18 +1,11 @@
 <template>
-  <div>
-    <div id="main-view">
-      <div class="mqtt-state" v-bind:class="{ 'mqtt-state-connected': isMqttConnected }">MQTT state: {{ getMqttState }}</div>
-      <div v-if="isSoftwareUpdateAvailable" class="software-update-available">
-        <router-link to="/update">
-          <button type="button" class="btn btn-success">Available Updates: 1</button>
-        </router-link>
-      </div>
+  <div class="main-view">
+    <div class="subheader">
       <GameInstanceList></GameInstanceList>
       <GameModeList></GameModeList>
-
-      <Overview></Overview>
     </div>
 
+    <Overview></Overview>
     <!-- The best way i could find to do this animation since vue hides element after transitions automtically -->
     <transition-group name="slide-info-bar" :run="ghoustDevToolsVisible">
       <InfoBar v-if="ghoustDevToolsVisible" key="infoBar" class="infobar-animated"></InfoBar>
@@ -21,8 +14,8 @@
 
     <InfoBar class="infobar-static" v-show="!ghoustDevToolsVisible"></InfoBar>
 
-  </div>
-</template>
+    </div>
+  </template>
 
 <script>
 import { mapGetters } from 'vuex'
@@ -35,9 +28,6 @@ import InfoBar from '../components/InfoBar'
 
 export default {
   computed: mapGetters([
-    'getMqttState',
-    'isMqttConnected',
-    'isSoftwareUpdateAvailable',
     'ghoustDevToolsVisible'
   ]),
   components: {
@@ -51,8 +41,13 @@ export default {
 body {
   overflow: hidden;
 }
-#main-view{
-  padding: 20px 40px;
+
+.main-view {
+  height: 90%;
+}
+
+.subheader {
+  height: 20%;
 }
 
 .infobar-static {
@@ -60,7 +55,7 @@ body {
   z-index: 0;
 }
 .infobar-animated {
-  bottom: 20%;
+  bottom: 25vh;
   z-index: 3;
 }
 
@@ -71,6 +66,6 @@ body {
   transition: all .5s ease;
 }
 .slide-info-bar-enter, .slide-info-bar-leave-to {
-  transform: translateY(20vh);
+  transform: translateY(25vh);
 }
 </style>

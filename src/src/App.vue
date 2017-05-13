@@ -53,6 +53,22 @@ export default {
       return false
     })
 
+    Mousetrap.bind(['r'], () => {
+      function getRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      }
+
+      const randInt = getRandomInt(10, 99)
+      let topic = 'GHOUST/clients/GHOUST_' + randInt + '-' + randInt + '/status'
+      let message = 'CONNECTED'
+      this.$store.dispatch('sendToClient', { topic, message })
+
+      topic = 'GHOUST/clients/GHOUST_' + randInt + '-' + randInt + '/events/battery'
+      message = getRandomInt(0, 1200).toString()
+      this.$store.dispatch('sendToClient', { topic, message })
+      return false
+    })
+
     // bind hotkeys
     for (let k in HOTKEY_MESSAGES) {
       Mousetrap.bind(k, () => {
@@ -66,16 +82,9 @@ export default {
 </script>
 
 <style>
-.mqtt-state.mqtt-state-connected {
-  color: green;
-}
-
-.software-update-available {
-  margin: 20px 0px;
-}
-
 .title-text {
   text-align: center;
   font-weight: 900;
+  height:10%;
 }
 </style>
