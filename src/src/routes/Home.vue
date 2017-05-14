@@ -50,7 +50,6 @@ body {
   height: 20%;
   width:100%;
   background-color: #212121;
-  box-shadow: 0 10px 17px -10px rgba(0,0,0,0.87);
   z-index: 4;
   display: table;
   table-layout: fixed;
@@ -66,7 +65,7 @@ body {
   transition: all .3s ease;
 }
 .slide-dev-tools-leave-active {
-  transition: all .5s ease;
+  transition: all .5s reverse;
 }
 .slide-dev-tools-enter, .slide-dev-tools-leave-to {
   transform: translateY(25vh);

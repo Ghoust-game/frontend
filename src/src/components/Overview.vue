@@ -1,22 +1,41 @@
 <template>
-  <div class="client-list-container" v-if="isMqttConnected">
-    <ul class="client-list row">
-      <li class="client-list-item col-md-4" v-for="client in getClients">
-        <div class="client-container">
+  <div class="client-list-container">
+    <transition-group mode="out-in" name="mqtt-view-switch">
+      <div v-if="isMqttConnected" key="client-list">
 
-          <div class="client-controls" v-bind:style="getClientStyle(client)">
-            <span v-bind:id="client.id + '-label'" @click="setLabel(client.id)">{{ client.label }}</span>
-            <img src="/static/assets/ping_ghoust.svg" class="ping-button left-align" @click="setColorRed(client.id)"></img>
+        <transition name="slide-software-update">
+          <div class="software-update-available col-md-12" v-if="isSoftwareUpdateAvailable">
+            <router-link to="/update">
+              <button type="button" class="update-button">Update!</button>
+            </router-link>
           </div>
+        </transition>
 
-          <div class="client-stats row">
-            <span class="client-wins col text-center">Wins: {{ client.wins }}</span>
-            <span class="client-losses col text-center">Losses: {{ client.losses }}</span>
-          </div>
+        <ul class="client-list row" key="client-list">
+          <li class="client-list-item col-md-4" v-for="client in getClients">
+            <div class="client-container">
 
-        </div>
-      </li>
-    </ul>
+              <div class="client-controls" v-bind:style="getClientStyle(client)">
+                <span v-bind:id="client.id + '-label'" @click="setLabel(client.id)">{{ client.label }}</span>
+                <img src="/static/assets/ping_ghoust.svg" class="ping-button left-align" @click="setColorRed(client.id)"></img>
+              </div>
+
+              <div class="client-stats row">
+                <span class="client-wins col text-center">Wins: {{ client.wins }}</span>
+                <span class="client-losses col text-center">Losses: {{ client.losses }}</span>
+              </div>
+
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+      <div v-else class="mqtt-state col align-center" key="mqqt-state">
+        <p>{{ getMqttState.slice(11) }}</p>
+      </div>
+
+    </transition-group>
   </div>
 </template>
 
@@ -27,7 +46,9 @@ import * as types from '../store/mutation-types'
 export default {
   computed: mapGetters([
     'getClients',
-    'isMqttConnected'
+    'getMqttState',
+    'isMqttConnected',
+    'isSoftwareUpdateAvailable'
   ]),
 
   methods: {
@@ -79,7 +100,44 @@ export default {
   height: 80%;
   overflow-y: scroll;
   min-width: 100%;
-  margin: 0px 15px 64px 0;
+  margin: 0px -15px 64px 0;
+  box-shadow: inset -5px 5px 25px rgba(0,0,0,0.87);
+}
+
+.software-update-available {
+  box-shadow: 0 10px 17px -10px rgba(0,0,0,0.87);
+  text-align: center;
+  margin-bottom:0 !important;
+  background-color: #414141;
+}
+
+.software-update-available .update-button {
+    margin: 15px;
+    background-color: #2ECC71;
+    color: #ffffff;
+    border: none;
+    height: 2.5em;
+    width: 9em;
+    border-radius: 4px;
+    transition: background-color .3s;
+  }
+
+.software-update-available .update-button:hover {
+    background-color: rgba(46, 204, 113, 0.7);
+}
+.mqtt-view-switch {
+  width:100%;
+  position: relative;
+}
+
+.mqtt-state {
+  width: 100%;
+  margin-top: 20%;
+  height: 256px;
+  color: rgba(0, 0, 0, 0.18);
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
 }
 
 .client-list {
@@ -126,5 +184,24 @@ export default {
 }
 .client-stats .client-losses {
   color: #E74C3C;
+}
+
+/* Transitions */
+
+.slide-software-update-enter-active {
+  transition: all .5s;
+}
+.slide-software-update-leave-active {
+  transition: all .5s;
+}
+.slide-software-update-enter, .slide-dev-tools-leave-to {
+  transform: translateY(-300px);
+}
+
+.mqtt-view-switch-enter-active, .mqtt-view-switch-leave-active {
+  transition: opacity .5s;
+}
+.mqtt-view-switch-enter-active, .mqtt-view-switch-leave-to {
+  opacity: 0;
 }
 </style>
