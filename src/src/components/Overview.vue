@@ -179,6 +179,9 @@ export default {
   height: 32px;
 }
 
+.client-stats {
+  text-align: center;
+}
 .client-stats .client-wins{
   color: #FFC107;
 }

@@ -21,14 +21,13 @@ import Overview from '../components/Overview'
 import GameModeList from '../components/GameModeList'
 import GameInstanceList from '../components/GameInstanceList'
 import GhoustDevTools from '../components/GhoustDevTools'
-import InfoBar from '../components/InfoBar'
 
 export default {
   computed: mapGetters([
     'ghoustDevToolsVisible'
   ]),
   components: {
-    Overview, GameModeList, GameInstanceList, GhoustDevTools, InfoBar
+    Overview, GameModeList, GameInstanceList, GhoustDevTools
   }
 }
 </script>
