@@ -4,7 +4,20 @@
       <router-link class="title-route" to="/"><span class="title-text align-middle">Ghoust Game</span></router-link>
     </header>
 
-    <router-view></router-view>
+    <div class="main-view ">
+      <div class="subheader row">
+        <!-- <GameInstanceList class="col"></GameInstanceList> disabled until implemented -->
+        <GameModeList class="col"></GameModeList>
+      </div>
+
+      <router-view></router-view>
+      <!-- The best way i could find to do this animation since vue hides element after transitions automtically -->
+      <transition name="slide-dev-tools" :run="ghoustDevToolsVisible">
+        <GhoustDevTools v-if="ghoustDevToolsVisible"></GhoustDevTools>
+      </transition>
+
+    </div>
+
   </div>
 </template>
 
@@ -13,6 +26,8 @@ import { mapGetters } from 'vuex'
 
 import * as types from './store/mutation-types'
 import * as Mousetrap from 'mousetrap'
+import GameModeList from './components/GameModeList'
+import GameInstanceList from './components/GameInstanceList'
 import GhoustDevTools from './components/GhoustDevTools'
 
 // hotkeys for sending mqtt messages. property is the hotkey, argument is [topic, message]
@@ -26,13 +41,14 @@ const HOTKEY_MESSAGES = {
 
 export default {
   computed: mapGetters([
+    'ghoustDevToolsVisible',
     'getMqttState',
     'isMqttConnected',
     'isSoftwareUpdateAvailable'
   ]),
 
   components: {
-    GhoustDevTools
+    GameModeList, GameInstanceList, GhoustDevTools
   },
 
   created: function () {
@@ -82,6 +98,9 @@ export default {
 </script>
 
 <style>
+body {
+  overflow: hidden;
+}
 header {
   text-align: center;
   font-weight: 900;
@@ -99,9 +118,40 @@ header {
   width: 100%;
   text-decoration: none !important;
 }
-
 .title-text {
   color: rgba(255, 255, 255, 0.9) !important;
   font-size: 6.5vh;
+}
+
+.main-view {
+  position: absolute;
+  top: 10%;
+  height: 90%;
+  width: 100%;
+}
+
+.subheader {
+  height: 20%;
+  width:100%;
+  background-color: #212121;
+  z-index: 4;
+  display: table;
+  table-layout: fixed;
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 16px 16px 16px 16px;
+}
+
+.subheader .col {
+  padding: 0 0 0 0;
+}
+.slide-dev-tools-enter-active {
+  transition: all .3s ease;
+}
+.slide-dev-tools-leave-active {
+  transition: all .5s reverse;
+}
+.slide-dev-tools-enter, .slide-dev-tools-leave-to {
+  transform: translateY(25vh);
 }
 </style>

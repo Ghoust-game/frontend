@@ -1,6 +1,6 @@
 <template>
-  <ul class="client-list row">
-    <li class="client-list-item col-md-4" v-for="client in getClients">
+  <ul transition-duration="0.3s" class="client-list">
+    <li class="client-list-item" v-for="client in getClients">
       <div class="client-container">
 
         <div class="client-controls" v-bind:style="getClientStyle(client)">
@@ -8,9 +8,10 @@
           <img src="/static/assets/ping_ghoust.svg" class="ping-button left-align" @click="setColorRed(client.id)"></img>
         </div>
 
-        <div class="client-stats row">
-          <div class="client-wins col-md-6">Wins: {{ client.wins }}</div>
-          <div class="client-losses col-md-6">Losses: {{ client.losses }}</div>
+        <div class="client-stats">
+          <div class="client-wins">Wins: {{ client.wins }}</div>
+          <div class="client-losses">Losses: {{ client.losses }}</div>
+          <div class="client-graph">Coming Soon</div>
         </div>
 
       </div>
@@ -72,24 +73,34 @@ export default {
 </script>
 
 <style>
-
 .client-list {
   padding: 15px 0 15px 0;
   margin: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .client-list-item {
-  margin-bottom: 16px;
-  margin-top: 16px;
+  padding: 16px;
+  width: 33.3%;
+}
+@media (max-width: 900px) {
+  .client-list-item {
+    width: 100%;
+  }
 }
 
 .client-container {
   box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.67);
   height: 72px;
-  padding: 0 !important;
   border-radius: 4px 4px 4px 4px;
   overflow: hidden;
   background-color: #212121;
+  transition: height .3s ease;
+}
+
+.client-container:hover {
+  height: 280px;
 }
 
 .client-controls {
@@ -104,23 +115,56 @@ export default {
   white-space: nowrap;
   font-size: 24px;
   font-weight: 900;
-  height: 16px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color .3s;
 }
+
+.client-controls span:hover {
+  background-color: rgba(0, 0, 0, 0.10);
+}
+
+.client-controls span:focus {
+  background-color: rgba(0, 0, 0, 0.20);
+}
+
 .client-controls .ping-button {
   background-size: cover;
   float: right;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
+  margin: -2px 0 0 0;
+  padding: 2px 0 4px 0;
+  border-radius: 4px;
+  transition: background-color .1s;
+}
+
+.client-controls .ping-button:hover  {
+  background-color: rgba(0, 0, 0, 0.10);
+}
+
+.client-controls .ping-button:active  {
+  background-color: rgba(0, 0, 0, 0.20);
 }
 
 .client-stats {
   text-align: center;
-  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .client-stats .client-wins{
   color: #FFC107;
+  width: 50%;
 }
 .client-stats .client-losses {
   color: #E74C3C;
+  width: 50%;
+}
+.client-stats .client-graph {
+  color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 208px;
+  text-align: center;
 }
 </style>

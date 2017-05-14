@@ -5,7 +5,7 @@
       <GameModeList class="col"></GameModeList>
     </div>
 
-    <Overview></Overview>
+    <router-view></router-view>
     <!-- The best way i could find to do this animation since vue hides element after transitions automtically -->
     <transition name="slide-dev-tools" :run="ghoustDevToolsVisible">
       <GhoustDevTools v-if="ghoustDevToolsVisible"></GhoustDevTools>
@@ -17,7 +17,6 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import Overview from '../components/Overview'
 import GameModeList from '../components/GameModeList'
 import GameInstanceList from '../components/GameInstanceList'
 import GhoustDevTools from '../components/GhoustDevTools'
