@@ -1,8 +1,16 @@
 <template>
-    <div class="game-mode-list">
-      <h4>Game Modes Available</h4>
-
-      <button v-for="gameMode in getGameModes" class="btn btn-primary" @click="startGameMode(gameMode)" >{{ gameMode }}</button>
+    <div class="game-mode-list-container">
+      <div>
+      <div class="game-mode-list-label">
+        <span>Game Mode</span>
+        </br>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col game-mode-button" v-for="gameMode in getGameModes" @click="startGameMode(gameMode)">
+          {{ gameMode }}
+        </div>
+      </div>
     </div>
 </template>
 
@@ -26,11 +34,32 @@ export default {
 </script>
 
 <style>
-.game-mode-list {
-  margin: 40px 0px
+.game-mode-list-container {
+  width: 100%;
+  text-align: center;
 }
 
-.btn {
-  margin: 4px;
+.game-mode-list-label {
+  width: 100%;
+  height: 24px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #ffffffB3;
+  box-shadow: 0 0px 17px -10px rgba(0,0,0,0.87);
 }
+
+.game-mode-button {
+  transition: background-color 0.2s ease;
+  text-align: center;
+  font-size: 24px;
+  height: 36px;
+  border-radius: 4px;
+  margin: 8px 16px 0 16px;
+  color: #ffffffB3;
+}
+
+.game-mode-button:hover {
+  background-color: #414141;
+}
+
 </style>

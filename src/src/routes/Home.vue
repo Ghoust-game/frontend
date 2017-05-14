@@ -1,21 +1,18 @@
 <template>
-  <div class="main-view">
-    <div class="subheader">
-      <GameInstanceList></GameInstanceList>
-      <GameModeList></GameModeList>
+  <div class="main-view ">
+    <div class="subheader row">
+      <!-- <GameInstanceList class="col"></GameInstanceList> disabled until implemented -->
+      <GameModeList class="col"></GameModeList>
     </div>
 
     <Overview></Overview>
     <!-- The best way i could find to do this animation since vue hides element after transitions automtically -->
-    <transition-group name="slide-info-bar" :run="ghoustDevToolsVisible">
-      <InfoBar v-if="ghoustDevToolsVisible" key="infoBar" class="infobar-animated"></InfoBar>
-      <GhoustDevTools v-if="ghoustDevToolsVisible" key="ghoustDevTools"></GhoustDevTools>
-    </transition-group>
+    <transition name="slide-dev-tools" :run="ghoustDevToolsVisible">
+      <GhoustDevTools v-if="ghoustDevToolsVisible"></GhoustDevTools>
+    </transition>
 
-    <InfoBar class="infobar-static" v-show="!ghoustDevToolsVisible"></InfoBar>
-
-    </div>
-  </template>
+  </div>
+</template>
 
 <script>
 import { mapGetters } from 'vuex'
@@ -43,29 +40,35 @@ body {
 }
 
 .main-view {
+  position: absolute;
+  top: 10%;
   height: 90%;
+  width: 100%;
 }
 
 .subheader {
   height: 20%;
+  width:100%;
+  background-color: #212121;
+  box-shadow: 0 10px 17px -10px rgba(0,0,0,0.87);
+  z-index: 4;
+  display: table;
+  table-layout: fixed;
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 16px 16px 16px 16px;
 }
 
-.infobar-static {
-  bottom: 0;
-  z-index: 0;
+.subheader .col {
+  padding: 0 0 0 0;
 }
-.infobar-animated {
-  bottom: 25vh;
-  z-index: 3;
-}
-
-.slide-info-bar-enter-active {
+.slide-dev-tools-enter-active {
   transition: all .3s ease;
 }
-.slide-info-bar-leave-active {
+.slide-dev-tools-leave-active {
   transition: all .5s ease;
 }
-.slide-info-bar-enter, .slide-info-bar-leave-to {
+.slide-dev-tools-enter, .slide-dev-tools-leave-to {
   transform: translateY(25vh);
 }
 </style>

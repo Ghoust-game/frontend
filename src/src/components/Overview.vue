@@ -1,5 +1,5 @@
 <template>
-  <div class="client-list-container container" v-if="isMqttConnected">
+  <div class="client-list-container" v-if="isMqttConnected">
     <ul class="client-list row">
       <li class="client-list-item col-md-4" v-for="client in getClients">
         <div class="client-container">
@@ -76,18 +76,15 @@ export default {
 
 <style>
 .client-list-container{
-  height: 70%;
+  height: 80%;
   overflow-y: scroll;
   min-width: 100%;
-  margin: 0 -15px 64px 0;
-  position: absolute;
-  right: 0;
+  margin: 0px 15px 64px 0;
 }
 
 .client-list {
-  padding: 32px;
-  margin-right: 15px !important;
-  margin-left: 0 !important;
+  padding: 15px 0 15px 0;
+  margin: 0 !important;
 }
 
 .client-list-item {
@@ -97,7 +94,7 @@ export default {
 .client-container {
   box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.67);
   height: 72px;
-  padding: 0 !important; /* counteracting bootstrap */
+  padding: 0 !important;
   border-radius: 4px 4px 4px 4px;
   overflow: hidden;
   background-color: #212121;
@@ -106,7 +103,7 @@ export default {
 .client-controls {
   height: 48px;
   padding: 6px 8px 6px 12px;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.9);
   z-index: -2;
   background-size: cover;
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <router-link to="/"><h1 class="title-text">Ghoust Game</h1></router-link>
+      <router-link class="title-route" to="/"><span class="title-text align-middle">Ghoust Game</span></router-link>
     </header>
 
     <router-view></router-view>
@@ -82,9 +82,26 @@ export default {
 </script>
 
 <style>
-.title-text {
+header {
   text-align: center;
   font-weight: 900;
-  height:10%;
+  font-size: 100%;
+  width: 100%;
+  height: 10vh;
+  background: #212121;
+  z-index: 5;
+}
+
+.title-route {
+  position: absolute;
+  left: 0;
+  height: 10vh;
+  width: 100%;
+  text-decoration: none !important;
+}
+
+.title-text {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 6.5vh;
 }
 </style>
