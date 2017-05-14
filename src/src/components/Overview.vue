@@ -21,8 +21,8 @@
               </div>
 
               <div class="client-stats row">
-                <span class="client-wins col text-center">Wins: {{ client.wins }}</span>
-                <span class="client-losses col text-center">Losses: {{ client.losses }}</span>
+                <div class="client-wins col-md-6">Wins: {{ client.wins }}</div>
+                <div class="client-losses col-md-6">Losses: {{ client.losses }}</div>
               </div>
 
             </div>
@@ -147,6 +147,7 @@ export default {
 
 .client-list-item {
   margin-bottom: 16px;
+  margin-top: 16px;
 }
 
 .client-container {
@@ -181,6 +182,7 @@ export default {
 
 .client-stats {
   text-align: center;
+  margin-top: 2px;
 }
 .client-stats .client-wins{
   color: #FFC107;
