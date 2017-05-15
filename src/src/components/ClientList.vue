@@ -113,11 +113,15 @@ export default {
 
 .client-controls span {
   white-space: nowrap;
+  overflow: hidden;
   font-size: 24px;
   font-weight: 900;
   padding: 4px;
   border-radius: 4px;
   transition: background-color .3s;
+}
+.client-controls span br {
+  display: none; /* no line wrap hack */
 }
 
 .client-controls span:hover {
