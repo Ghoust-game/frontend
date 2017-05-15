@@ -42,6 +42,7 @@ const mutations = {
     const client = {
       id: clientId,
       label: clientId,
+      extended: false,
       alive: true, // hacky implementation
       batteryLevel: '?',
       wins: 0, // hacky implementation
@@ -53,6 +54,16 @@ const mutations = {
   [types.CLIENT_REMOVE] (state, clientId) {
     state.clients = state.clients.filter((client) => {
       return client.id !== clientId
+    })
+  },
+
+  [types.TOGGLE_CLIENT_EXTENDED] (state, { clientId, batteryLevel }) {
+    state.clients.forEach((client, i) => {
+      if (client.id === clientId) {
+        client.extended = !client.extended
+        Vue.set(state.clients, i, client)
+        return
+      }
     })
   },
 

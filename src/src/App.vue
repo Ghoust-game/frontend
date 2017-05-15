@@ -4,10 +4,11 @@
       <router-link class="title-route" to="/"><span class="title-text align-middle">Ghoust Game</span></router-link>
     </header>
 
-    <div class="main-view ">
+    <div class="main-view">
       <div class="subheader row">
         <!-- <GameInstanceList class="col"></GameInstanceList> disabled until implemented -->
         <GameModeList class="col"></GameModeList>
+        <RouteMenu class="col"></RouteMenu>
       </div>
 
       <div class="router-container">
@@ -30,6 +31,7 @@ import { mapGetters } from 'vuex'
 import * as types from './store/mutation-types'
 import * as Mousetrap from 'mousetrap'
 import GameModeList from './components/GameModeList'
+import RouteMenu from './components/RouteMenu'
 import GameInstanceList from './components/GameInstanceList'
 import GhoustDevTools from './components/GhoustDevTools'
 
@@ -51,7 +53,7 @@ export default {
   ]),
 
   components: {
-    GameModeList, GameInstanceList, GhoustDevTools
+    GameModeList, GameInstanceList, GhoustDevTools, RouteMenu
   },
 
   created: function () {
@@ -155,6 +157,10 @@ header {
   padding: 0 0 0 0;
 }
 
+.accordion-route-menu {
+  height: 64px;
+}
+
 .slide-dev-tools-enter-active {
   transition: all .3s ease;
 }
@@ -164,7 +170,6 @@ header {
 .slide-dev-tools-enter, .slide-dev-tools-leave-to {
   transform: translateY(25vh);
 }
-
 
 .fade-router-enter-active {
   transition: all .3s ease;

@@ -1,22 +1,22 @@
 <template>
-  <ul transition-duration="0.3s" class="client-list">
-    <li class="client-list-item" v-for="client in getClients">
-      <div class="client-container">
+    <transition-group mode="out-in" name="client-list" tag="ul" class="client-list" style="width: 100%;">
+      <li class="client-list-item" key="client-list-item" v-for="client in getClients">
+        <div class="client-container" v-bind:class="{ 'extended': client.extended }" @click="onClientClick(client.id)">
 
-        <div class="client-controls" v-bind:style="getClientStyle(client)">
-          <span v-bind:id="client.id + '-label'" @click="setLabel(client.id)">{{ client.label }}</span>
-          <img src="/static/assets/ping_ghoust.svg" class="ping-button left-align" @click="setColorRed(client.id)"></img>
+          <div class="client-controls" v-bind:style="getClientStyle(client)">
+            <span v-bind:id="client.id + '-label'" @click="setLabel(client.id)">{{ client.label }}</span>
+            <img src="/static/assets/ping_ghoust.svg" class="ping-button left-align" @click="setColorRed(client.id)"></img>
+          </div>
+
+          <div class="client-stats">
+            <div class="client-wins">Wins: {{ client.wins }}</div>
+            <div class="client-losses">Losses: {{ client.losses }}</div>
+            <div class="client-graph">Coming Soon</div>
+          </div>
+
         </div>
-
-        <div class="client-stats">
-          <div class="client-wins">Wins: {{ client.wins }}</div>
-          <div class="client-losses">Losses: {{ client.losses }}</div>
-          <div class="client-graph">Coming Soon</div>
-        </div>
-
-      </div>
-    </li>
-  </ul>
+      </li>
+    </transition-group>
 </template>
 
 <script>
@@ -43,6 +43,9 @@ export default {
         textDom.innerText = label
         this.$store.commit(types.SET_LABEL, { clientId, label })
       }
+    },
+    onClientClick (clientId) {
+      this.$store.commit(types.TOGGLE_CLIENT_EXTENDED, { clientId })
     },
     getClientStyle (client) {
       const solidColor = client.alive ? '#2ECC71' : '#E74C3C'
@@ -84,6 +87,7 @@ export default {
   padding: 16px;
   width: 33.3%;
 }
+
 @media (max-width: 900px) {
   .client-list-item {
     width: 100%;
@@ -92,15 +96,15 @@ export default {
 
 .client-container {
   box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.67);
-  height: 72px;
   border-radius: 4px 4px 4px 4px;
   overflow: hidden;
   background-color: #212121;
+  height: 72px;
   transition: height .3s ease;
 }
 
-.client-container:hover {
-  height: 280px;
+.client-container.extended {
+  height: 280px !important;
 }
 
 .client-controls {
@@ -165,10 +169,26 @@ export default {
   color: #E74C3C;
   width: 50%;
 }
+
 .client-stats .client-graph {
   color: rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 208px;
   text-align: center;
+}
+
+/* Transitions */
+
+.client-list-enter-acvtive, .client-list-leave-active {
+  transition: all 0.5s;
+}
+
+.client-list-move {
+  transition: transform 1s;
+}
+
+.client-list-enter, .client-list-leave-active {
+  opacity: 0;
+  transform: translateY(10px);
 }
 </style>
