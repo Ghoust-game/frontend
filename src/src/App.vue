@@ -10,9 +10,13 @@
         <GameModeList class="col"></GameModeList>
       </div>
 
-      <router-view></router-view>
+      <div class="router-container">
+       <transition name="fade-router" mode="out-in">
+        <router-view></router-view>
+       </transition>
+      </div>
       <!-- The best way i could find to do this animation since vue hides element after transitions automtically -->
-      <transition name="slide-dev-tools" :run="ghoustDevToolsVisible">
+      <transition name="slide-dev-tools">
         <GhoustDevTools v-if="ghoustDevToolsVisible"></GhoustDevTools>
       </transition>
 
@@ -23,7 +27,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 import * as types from './store/mutation-types'
 import * as Mousetrap from 'mousetrap'
 import GameModeList from './components/GameModeList'
@@ -142,16 +145,34 @@ header {
   padding: 16px 16px 16px 16px;
 }
 
+.router-container {
+  box-shadow: inset -5px 5px 25px rgba(0,0,0,0.87);
+  height:100%;
+  margin-right: -15px;
+}
+
 .subheader .col {
   padding: 0 0 0 0;
 }
+
 .slide-dev-tools-enter-active {
   transition: all .3s ease;
 }
 .slide-dev-tools-leave-active {
-  transition: all .5s reverse;
+  transition: all .5s ease;
 }
 .slide-dev-tools-enter, .slide-dev-tools-leave-to {
   transform: translateY(25vh);
+}
+
+
+.fade-router-enter-active {
+  transition: all .3s ease;
+}
+.fade-router-leave-active {
+  transition: all .5s ease;
+}
+.fade-router-enter, .fade-router-leave-to {
+  opacity: 0;
 }
 </style>

@@ -46,12 +46,11 @@ export default {
 </script>
 
 <style>
-.client-list-container{
+.client-list-container {
   height: 80%;
   overflow-y: scroll;
   min-width: 100%;
-  margin: 0px -15px 64px 0;
-  box-shadow: inset -5px 5px 25px rgba(0,0,0,0.87);
+  margin-bottom: 64px;
 }
 
 .software-update-available {
@@ -75,6 +74,7 @@ export default {
 .software-update-available .update-button:hover {
     background-color: rgba(46, 204, 113, 0.7);
 }
+
 .mqtt-view-switch {
   width:100%;
   position: relative;
@@ -92,17 +92,18 @@ export default {
 /* Transitions */
 
 .slide-software-update-enter-active {
-  transition: all .5s;
+  transition: all .3s ease;
 }
 .slide-software-update-leave-active {
-  transition: all .5s;
+  transition: all .3s ease;
 }
+
 .slide-software-update-enter, .slide-dev-tools-leave-to {
   transform: translateY(-300px);
 }
 
 .mqtt-view-switch-enter-active, .mqtt-view-switch-leave-active {
-  transition: opacity .5s;
+  transition: opacity .5s ease;
 }
 .mqtt-view-switch-enter-active, .mqtt-view-switch-leave-to {
   opacity: 0;

@@ -61,10 +61,6 @@ export default {
 </script>
 
 <style>
-.update {
-  margin: 20px 0px;
-}
-
 .update .actions {
   margin: 20px;
 }
