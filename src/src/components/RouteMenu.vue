@@ -2,26 +2,23 @@
   <div class="route-menu">
     <div class="row">
       <router-link class="col route" tag="div" to="/">
-        <span class="update-button">Client List!</span>
+        <img src="/static/assets/client_list.svg" class="route-button"></img>
       </router-link>
 
       <transition>
         <router-link class="col route" tag="div" to="/update">
-          <span class="update-button">Update!</span>
+          <img src="/static/assets/update_ghoust.svg" class="route-button"></img>
         </router-link>
       </transition>
 
       <router-link class="col route" tag="div" to="/">
-        <span class="update-button">Stats!</span>
+        <img src="/static/assets/stats.svg" class="route-button"></img>
       </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-// import * as types from '../store/mutation-types'
-
 export default {
   computed: mapGetters([
   ]),
@@ -59,5 +56,10 @@ export default {
 
 .route.router-link-exact-active {
   background-color: #414141;
+}
+
+.route-button {
+  height: 48px;
+  padding: 8px;
 }
 </style>
