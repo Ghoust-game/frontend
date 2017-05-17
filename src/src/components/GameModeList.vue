@@ -37,6 +37,7 @@ export default {
 .game-mode-list-container {
   width: 100%;
   text-align: center;
+  display: table-row;
 }
 
 .game-mode-list-label {

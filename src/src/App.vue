@@ -137,14 +137,14 @@ header {
 
 .subheader {
   height: 20%;
-  width:100%;
+  width: 100%;
   background-color: #212121;
   z-index: 4;
   display: table;
   table-layout: fixed;
   margin: 0 !important;
   color: rgba(255, 255, 255, 0.9);
-  padding: 16px 16px 16px 16px;
+  padding: 16px 16px 0 16px;
 }
 
 .router-container {

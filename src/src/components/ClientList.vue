@@ -1,14 +1,14 @@
 <template>
     <transition-group mode="out-in" name="client-list" tag="ul" class="client-list" style="width: 100%;">
       <li class="client-list-item" key="client-list-item" v-for="client in getClients">
-        <div class="client-container" v-bind:class="{ 'extended': client.extended }" @click="onClientClick(client.id)">
+        <div class="client-container" v-bind:class="{ 'extended': client.extended }">
 
           <div class="client-controls" v-bind:style="getClientStyle(client)">
             <span v-bind:id="client.id + '-label'" @click="setLabel(client.id)">{{ client.label }}</span>
             <img src="/static/assets/ping_ghoust.svg" class="ping-button left-align" @click="setColorRed(client.id)"></img>
           </div>
 
-          <div class="client-stats">
+          <div class="client-stats" @click="onClientClick(client.id)">
             <div class="client-wins">Wins: {{ client.wins }}</div>
             <div class="client-losses">Losses: {{ client.losses }}</div>
             <div class="client-graph">Coming Soon</div>
@@ -160,7 +160,14 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  background-color: #212121;
+  transition: all .3s;
 }
+
+.client-stats:hover {
+  background-color: #2f2f2f;
+}
+
 .client-stats .client-wins{
   color: #FFC107;
   width: 50%;

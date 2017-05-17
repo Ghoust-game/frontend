@@ -92,17 +92,21 @@ const mutations = {
   },
 
   [types.SET_LABEL] (state, { clientId, label }) {
-    state.clients.forEach((client) => {
+    state.clients.forEach((client, i) => {
       if (client.id === clientId) {
         client.label = label
+        Vue.set(state.clients, i, client)
+        return
       }
     })
   },
 
   [types.SET_BATTERY_LEVEL] (state, { clientId, batteryLevel }) {
-    state.clients.forEach((client) => {
+    state.clients.forEach((client, i) => {
       if (client.id === clientId) {
         client.batteryLevel = batteryLevel
+        Vue.set(state.clients, i, client)
+        return
       }
     })
   },
