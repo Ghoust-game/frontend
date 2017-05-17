@@ -11,7 +11,7 @@
         </router-link>
       </transition>
 
-      <router-link class="col route" tag="div" to="/">
+      <router-link class="col route" tag="div" to="/stats">
         <img src="/static/assets/stats.svg" class="route-button"></img>
       </router-link>
     </div>
@@ -20,8 +20,6 @@
 
 <script>
 export default {
-  computed: mapGetters([
-  ]),
   methods: {
   },
   components: {
