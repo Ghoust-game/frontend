@@ -58,11 +58,11 @@ export default {
 }
 
 .route:hover {
-  background-color: #2f2f2f;
+  background-color: #1B7842;
 }
 
 .route.router-link-exact-active {
-  background-color: #414141;
+  background-color: #166337;
 }
 
 .route-button {
