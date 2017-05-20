@@ -46,7 +46,6 @@ export default {
   font-size: 16px;
   font-weight: 700;
   color: #ffffffB3;
-  box-shadow: 0 0px 17px -10px rgba(0,0,0,0.87);
 }
 
 .game-mode-button {
