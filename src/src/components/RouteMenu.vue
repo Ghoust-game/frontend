@@ -6,7 +6,7 @@
       </router-link>
 
       <transition name="show-update">
-        <router-link v-show="isSoftwareUpdateAvailable" class="col route update" tag="div" to="/update">
+        <router-link v-show="isSoftwareUpdateAvailable" class="col route update-button" tag="div" to="/update">
           <img src="/static/assets/update_ghoust.svg" class="route-button"></img>
         </router-link>
       </transition>
@@ -53,7 +53,7 @@ export default {
   transition: all .3s ease;
 }
 
-.route update{
+.route .update-button{
   width: 0%;
 }
 
