@@ -109,7 +109,7 @@ export default {
 
 .client-controls {
   height: 48px;
-  padding: 6px 8px 6px 12px;
+  padding: 4px 8px 4px 12px;
   color: rgba(255, 255, 255, 0.9);
   z-index: -2;
   background-size: cover;
@@ -118,9 +118,9 @@ export default {
 .client-controls span {
   white-space: nowrap;
   overflow: hidden;
-  font-size: 24px;
-  font-weight: 900;
-  padding: 4px;
+  font-size: 28px;
+  padding: 0 4px 0 4px;
+  font-weight: 700;
   border-radius: 4px;
   transition: background-color .3s;
 }

@@ -86,7 +86,7 @@ export default {
   height: 256px;
   color: rgba(0, 0, 0, 0.18);
   font-size: 2em;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
 }
 /* Transitions */
