@@ -21,7 +21,7 @@ export default {
   computed: mapGetters([
     'getClients',
     'getMqttState',
-    'isMqttConnected',
+    'isMqttConnected'
   ]),
 
   methods: {
