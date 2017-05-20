@@ -3,6 +3,7 @@
     <div class="row">
       <router-link class="col route" tag="div" to="/">
         <img src="/static/assets/client_list.svg" class="route-button"></img>
+        <span class="route-label">Client List</span>
       </router-link>
 
       <transition name="show-update">
@@ -13,6 +14,7 @@
 
       <router-link class="col route" tag="div" to="/stats">
         <img src="/static/assets/stats.svg" class="route-button"></img>
+        <span class="route-label">Stats</span>
       </router-link>
     </div>
   </div>
@@ -68,6 +70,12 @@ export default {
 .route-button {
   height: 48px;
   padding: 8px;
+}
+
+.route-label {
+  font-size: 20px;
+  vertical-align: middle;
+  font-weight: 700;
 }
 /* Transition */
 .show-update-enter-active {
