@@ -9,6 +9,7 @@
       <transition name="show-update">
         <router-link v-show="isSoftwareUpdateAvailable" class="col route update-button" tag="div" to="/update">
           <img src="/static/assets/update_ghoust.svg" class="route-button"></img>
+          <span class="route-label">Update</span>
         </router-link>
       </transition>
 
