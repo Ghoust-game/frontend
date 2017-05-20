@@ -48,8 +48,7 @@ export default {
   computed: mapGetters([
     'ghoustDevToolsVisible',
     'getMqttState',
-    'isMqttConnected',
-    'isSoftwareUpdateAvailable'
+    'isMqttConnected'
   ]),
 
   components: {

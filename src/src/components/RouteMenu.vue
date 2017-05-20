@@ -5,8 +5,8 @@
         <img src="/static/assets/client_list.svg" class="route-button"></img>
       </router-link>
 
-      <transition>
-        <router-link class="col route" tag="div" to="/update">
+      <transition name="show-update">
+        <router-link v-show="isSoftwareUpdateAvailable" class="col route update" tag="div" to="/update">
           <img src="/static/assets/update_ghoust.svg" class="route-button"></img>
         </router-link>
       </transition>
@@ -19,7 +19,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
+  computed: mapGetters([
+    'isSoftwareUpdateAvailable'
+  ]),
   methods: {
   },
   components: {
@@ -48,6 +53,10 @@ export default {
   transition: all .3s ease;
 }
 
+.route update{
+  width: 0%;
+}
+
 .route:hover {
   background-color: #2f2f2f;
 }
@@ -60,4 +69,15 @@ export default {
   height: 48px;
   padding: 8px;
 }
+/* Transition */
+.show-update-enter-active {
+  transition: all .3s ease;
+}
+.show-update-leave-active {
+  transition: all .5s ease;
+}
+.show-update-enter, .show-update-leave-to {
+  width: 100%;
+}
+
 </style>

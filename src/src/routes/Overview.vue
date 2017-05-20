@@ -2,17 +2,7 @@
   <div class="client-list-container">
     <transition-group mode="out-in" name="mqtt-view-switch">
       <div v-if="isMqttConnected" key="client-list">
-
-        <transition name="slide-software-update">
-          <div class="software-update-available col-md-12" v-if="isSoftwareUpdateAvailable">
-            <router-link to="/update">
-              <button type="button" class="update-button">Update!</button>
-            </router-link>
-          </div>
-        </transition>
-
         <ClientList key="client-list"></ClientList>
-
       </div>
 
       <div v-else class="mqtt-state col align-center" key="mqqt-state">
@@ -32,7 +22,6 @@ export default {
     'getClients',
     'getMqttState',
     'isMqttConnected',
-    'isSoftwareUpdateAvailable'
   ]),
 
   methods: {
