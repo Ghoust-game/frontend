@@ -42,9 +42,11 @@ const mutations = {
     const client = {
       id: clientId,
       label: clientId,
+      extended: false,
+      alive: true, // hacky implementation
       batteryLevel: '?',
-      wins: 0,
-      losses: 0
+      wins: 0, // hacky implementation
+      losses: 0 // hacky implementation
     }
     state.clients.push(client)
   },
@@ -55,15 +57,26 @@ const mutations = {
     })
   },
 
-  [types.CLIENT_WIN] (state, clientId) {
-    for (var i = 0; i < state.clients.length; i++) {
-      if (state.clients[i].id === clientId) {
-        const client = state.clients[i]
-        client.wins++
+  [types.TOGGLE_CLIENT_EXTENDED] (state, { clientId, batteryLevel }) {
+    state.clients.forEach((client, i) => {
+      if (client.id === clientId) {
+        client.extended = !client.extended
         Vue.set(state.clients, i, client)
         return
       }
+    })
+  },
+
+  [types.CLIENT_WIN] (state, clientId) {
+    for (var i = 0; i < state.clients.length; i++) {
+      const client = state.clients[i]
+      client.alive = true
+      if (client.id === clientId) {
+        client.wins++
+      }
+      Vue.set(state.clients, i, client)
     }
+    return
   },
 
   [types.CLIENT_LOSE] (state, clientId) {
@@ -71,6 +84,7 @@ const mutations = {
       if (state.clients[i].id === clientId) {
         const client = state.clients[i]
         client.losses++
+        client.alive = false
         Vue.set(state.clients, i, client)
         return
       }
@@ -78,17 +92,21 @@ const mutations = {
   },
 
   [types.SET_LABEL] (state, { clientId, label }) {
-    state.clients.forEach((client) => {
+    state.clients.forEach((client, i) => {
       if (client.id === clientId) {
         client.label = label
+        Vue.set(state.clients, i, client)
+        return
       }
     })
   },
 
   [types.SET_BATTERY_LEVEL] (state, { clientId, batteryLevel }) {
-    state.clients.forEach((client) => {
+    state.clients.forEach((client, i) => {
       if (client.id === clientId) {
         client.batteryLevel = batteryLevel
+        Vue.set(state.clients, i, client)
+        return
       }
     })
   },

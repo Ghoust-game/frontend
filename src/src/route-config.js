@@ -1,7 +1,9 @@
-import Home from './routes/Home'
+import Overview from './routes/Overview'
 import Update from './routes/Update'
+import Stats from './routes/Stats'
 
 export const routes = [
-  { path: '/', component: Home },
-  { path: '/update', component: Update }
+  { path: '/', component: Overview },
+  { path: '/update', component: Update },
+  { path: '/stats', component: Stats }
 ]

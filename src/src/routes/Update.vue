@@ -1,7 +1,7 @@
 <template>
   <div class="update">
     <div v-if="isSoftwareUpdateAvailable">
-      <h3>An update is available!</h3>
+      <span class="update-status">An update is available!</span>
 
       <div class="components">
         <h4>Components</h4>
@@ -22,7 +22,7 @@
     </div>
 
     <div v-else>
-      <h3>Software is up to date!</h3>
+      <span class="update-status">Software is up to date!</span>
 
       <div class="components">
         <h4>Components</h4>
@@ -62,11 +62,18 @@ export default {
 
 <style>
 .update {
-  margin: 20px 0px;
+  text-align: center;
+  padding: 48px;
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .update .actions {
   margin: 20px;
+}
+
+.update-status {
+  font-weight: 700;
+  font-size: 2em;
 }
 
 .components {
