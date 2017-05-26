@@ -32,6 +32,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import * as types from './store/mutation-types'
+import * as consts from './store/constants'
 import * as Mousetrap from 'mousetrap'
 import GameModeList from './components/GameModeList'
 import RouteMenu from './components/RouteMenu'
@@ -45,6 +46,11 @@ const HOTKEY_MESSAGES = {
   '2': ['GHOUST/clients/GHOUST_77-68/events/battery', '440'],  // battery low
   '3': ['GHOUST/clients/GHOUST_77-68/events/accelerometer', 'OUTSHOCK (25.514)'],  // outshock
   '4': ['GHOUST/clients/GHOUST_77-68/config/led', 'PRESET:1']  // rainbow
+}
+
+const CLIENT_VIEW_TYPES = {
+  'l': consts.CLIENT_LIST_VIEW_TYPE_LIST,
+  't': consts.CLIENT_LIST_VIEW_TYPE_TABLE
 }
 
 export default {
@@ -91,6 +97,19 @@ export default {
       this.$store.dispatch('sendToClient', { topic, message })
       return false
     })
+
+    Mousetrap.bind(['d'], () => {
+      this.$store.commit(types.TOGGLE_GHOUST_DEV_TOOLS_VISIBLE)
+      return false
+    })
+
+    for (let k in CLIENT_VIEW_TYPES) {
+      Mousetrap.bind(k, () => {
+        const viewType = CLIENT_VIEW_TYPES[k]
+        this.$store.commit(types.SET_CLIENT_VIEW_TYPE, viewType)
+        return false
+      })
+    }
 
     // bind hotkeys
     for (let k in HOTKEY_MESSAGES) {

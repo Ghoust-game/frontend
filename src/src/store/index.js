@@ -13,6 +13,7 @@ const state = {
   // ui state
   isLoading: false,
   clients: [],
+  clientViewType: consts.CLIENT_LIST_VIEW_TYPE_TABLE,
   mqttState: consts.MQTT_STATE_OFFLINE,
   mqttError: null,
   mqttUrl: MQTT_URL,
@@ -125,6 +126,10 @@ const mutations = {
 
   [types.TOGGLE_GHOUST_DEV_TOOLS_VISIBLE] (state) {
     state.ghoustDevToolsVisible = !state.ghoustDevToolsVisible
+  },
+
+  [types.SET_CLIENT_VIEW_TYPE] (state, viewType) {
+    state.clientViewType = viewType
   },
 
   [types.CLIENTS_CLEAR] (state) {

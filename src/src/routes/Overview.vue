@@ -1,8 +1,9 @@
 <template>
-  <div class="client-list-container">
-    <transition-group mode="out-in" name="mqtt-view-switch">
+  <div class="overview-container">
+    <transition-group tag="div" mode="out-in" name="mqtt-view-switch">
       <div v-if="isMqttConnected" key="client-list">
-        <ClientList key="client-list"></ClientList>
+        <ClientList v-if="clientViewType === 'CLIENT_LIST_VIEW_TYPE_LIST'" key="client-list"></ClientList>
+        <ClientTable v-else-if="clientViewType === 'CLIENT_LIST_VIEW_TYPE_TABLE'" key="client-table"></ClientTable>
       </div>
 
       <div v-else class="mqtt-state col align-center" key="mqqt-state">
@@ -14,28 +15,34 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 import ClientList from '../components/ClientList'
+import ClientTable from '../components/ClientTable'
 
 export default {
-  computed: mapGetters([
-    'getClients',
-    'getMqttState',
-    'isMqttConnected'
-  ]),
+  computed: {
+    ...mapGetters([
+      'getClients',
+      'getMqttState',
+      'isMqttConnected'
+    ]),
+    ...mapState([
+      'clientViewType'
+    ])
+  },
 
   methods: {
     ...mapActions([])
   },
 
   components: {
-    ClientList
+    ClientList, ClientTable
   }
 }
 </script>
 
 <style>
-.client-list-container {
+.overview-container {
   height: 80%;
   overflow-y: scroll;
   min-width: 100%;

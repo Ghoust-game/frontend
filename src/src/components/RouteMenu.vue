@@ -3,7 +3,7 @@
     <div class="row">
       <router-link class="col route" tag="div" to="/">
         <img src="/static/assets/client_list.svg" class="route-button"></img>
-        <span class="route-label">Client List</span>
+        <span class="route-label">Clients</span>
       </router-link>
 
       <transition name="show-update">

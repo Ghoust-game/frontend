@@ -51,7 +51,7 @@ export default {
     },
     getClientStyle (client) {
       const solidColor = client.alive ? '#2ECC71' : '#E74C3C'
-      const alphaColor = client.alive ? '#229955' : 'rgba(231, 76, 60, 0.7)'
+      const alphaColor = client.alive ? '#229955' : '#AD392D'
 
       if (client.batteryLevel !== '?') {
         let batteryPercentage = Math.floor(((client.batteryLevel / 1200) * 100)) + '%' // I don't know what the max. battery level is
