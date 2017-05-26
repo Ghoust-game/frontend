@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <header>
-      <router-link class="title-route" to="/"><span class="title-text align-middle">Ghoust Game</span></router-link>
+      <router-link class="title-route" to="/">
+        <img class="title-img" src="/static/assets/ghoust_logo_white.png"></img>
+        <span class="title-text align-middle">Ghoust</span>
+      </router-link>
     </header>
 
     <div class="main-view">
@@ -122,9 +125,15 @@ header {
   width: 100%;
   text-decoration: none !important;
 }
+
+.title-img {
+  height: 4.5vh;
+  margin-right: 16px;
+}
 .title-text {
   color: rgba(255, 255, 255, 0.9) !important;
   font-size: 6.5vh;
+  font-weight: 300;
 }
 
 .main-view {
