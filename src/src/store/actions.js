@@ -157,6 +157,9 @@ export const mqttMessageReceived = ({ commit, state }, { topic, msg }) => {
         commit(types.CLIENT_WIN, clientId)
       }
     }
+    if (configValue === 'name') {
+      commit(types.SET_LABEL, { clientId, label: msg })
+    }
   }
 }
 
