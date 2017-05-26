@@ -41,7 +41,9 @@ export default {
           label = clientId
         }
         textDom.innerText = label
-        this.$store.commit(types.SET_LABEL, { clientId, label })
+
+        // this.$store.commit(types.SET_LABEL, { clientId, label })
+        this.$store.dispatch('sendToClient', { topic: `GHOUST/clients/${clientId}/config/name`, message: label })
       }
     },
     onClientClick (clientId) {
@@ -81,6 +83,7 @@ export default {
   margin: 0 !important;
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
 }
 
 .client-list-item {
